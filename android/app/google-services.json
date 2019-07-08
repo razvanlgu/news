@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "554091953455",
+    "firebase_url": "https://news-868b9.firebaseio.com",
+    "project_id": "news-868b9",
+    "storage_bucket": "news-868b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554091953455:android:aa36af748910aa4c",
+        "android_client_info": {
+          "package_name": "ro.teamnet.news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554091953455-q1li51iqcnb3ar55bb4fr7kl87hfna91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyiHp4dqm1p-XfxoUHSNJ0opSNpm2tW9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554091953455-q1li51iqcnb3ar55bb4fr7kl87hfna91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
