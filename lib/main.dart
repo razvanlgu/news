@@ -39,10 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'Hello World!',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
           ],
         ),
       ),
