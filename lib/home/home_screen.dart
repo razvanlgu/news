@@ -8,6 +8,8 @@ class HomeScreen extends StatelessWidget {
 
   Widget _content(BuildContext context, HomeViewModel homeViewModel) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
           child: Text(homeViewModel.mesaj),
