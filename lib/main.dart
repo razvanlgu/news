@@ -11,11 +11,14 @@ import 'package:news/resources/keys.dart';
 import 'package:news/resources/constants.dart';
 import 'package:news/home/home_screen.dart';
 
+import 'auth/auth_screen.dart';
+import 'auth/register_screen.dart';
+
 void main() async {
   // keep portrait mode always enabled
   await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
+   // DeviceOrientation.portraitUp,
+   // DeviceOrientation.portraitDown
   ]);
 
   // Store initialization
@@ -85,7 +88,7 @@ class MyApp extends StatelessWidget {
         } else {          if (snapshot.hasData) {
           return HomeScreen();
         } else {
-          return HomeScreen(); // De modificat cu sscreenul de login
+          return LoginScreen(); // De modificat cu sscreenul de login
         }
         }
       },
