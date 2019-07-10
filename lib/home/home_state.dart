@@ -1,10 +1,12 @@
+import 'package:meta/meta.dart';
+
 @immutable
 class HomeState {
   final String mesaj;
 
   // Constrctor
   HomeState({
-    this.mesaj;
+    this.mesaj
   });
 
   factory HomeState.initial() =>

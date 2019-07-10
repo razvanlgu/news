@@ -7,4 +7,4 @@ import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> middlewares() => [
   // Middlewares
-]
+];

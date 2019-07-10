@@ -9,6 +9,6 @@ Future<Store<AppState>> createStore() async {
   return Store(
     appReducer,
     initialState: AppState.initial(),
-    middleware: middlewares;
+//    middleware: middlewares;
   );
 }

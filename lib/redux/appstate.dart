@@ -1,21 +1,19 @@
-/****
-    De importat toate stateurile
- ****/
+import 'package:news/home/home_state.dart';
 
 import 'package:meta/meta.dart';
 
 @immutable
 class AppState {
-  // De declarat toate stateurile
+  final HomeState homeState;
 
   // Constructor
   AppState({
-    // this.numeState
+    this.homeState
   });
 
   factory AppState.initial() {
     return AppState(
-      // numeState: NumeState.initial(),
+      homeState: HomeState.initial()
     );
   }
 }

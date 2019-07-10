@@ -1,6 +1,4 @@
-/****
-    De adaugat import pentru fiecare reducer
- ***/
+import 'package:news/redux/appstate.dart';
 
 AppState appReducer(AppState state, dynamic action) =>
     AppState(
