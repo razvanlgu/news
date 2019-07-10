@@ -28,3 +28,11 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.google.firebase') {
+            details.useVersion "15.+"
+        }
+    }
+}
