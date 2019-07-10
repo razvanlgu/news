@@ -18,8 +18,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _screenWidth = MediaQuery.of(context).size.width;
-    _screenHeight = MediaQuery.of(context).size.height;
+//    _screenWidth = MediaQuery.of(context).size.width;
+//    _screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       // De adaugat drawer
       body: StoreConnector<AppState, HomeViewModel>(
