@@ -5,7 +5,8 @@ import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> middlewares() => [
 ]
-  ..addAll(authMiddleware());
+  ..addAll(authMiddleware())
+  ..addAll(homeMiddleware());
 
 class NavigationMiddleware extends MiddlewareClass<AppState>{
   @override

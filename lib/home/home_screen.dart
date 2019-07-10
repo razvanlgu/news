@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
+import 'home_state.dart';
+
 class HomeScreen extends StatelessWidget {
 
   Widget _content(BuildContext context, HomeViewModel homeViewModel) {
@@ -11,9 +13,9 @@ class HomeScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Expanded(
-          child: Text(homeViewModel.mesaj),
-        ),
+        _myAppBar(),
+        _newsList(homeViewModel),
+//        _filterSortButtons()
       ],
     );
   }
@@ -36,6 +38,38 @@ class HomeScreen extends StatelessWidget {
  * Get all the news
  */
   _onInit(Store<AppState> store) {
-
+    store.dispatch(GetNews())
   }
 }
+
+  // AppBar
+  class _myAppBar extends StatelessWidget{
+
+    @override
+    Widget build(BuildContext context) {
+      return AppBar(
+
+      );
+    }
+  }
+
+  // News list
+  class _newsList extends StatelessWidget {
+
+  final HomeViewModel model;
+
+  _newsList(this.model);
+
+  @override
+    Widget build(BuildContext context) {
+      return Expanded(
+        child: ListView(
+          children: model.news
+              .map((Item item) => RaisedButton(
+                child: Text(item.continut),
+                onPressed: () => print(item.continut),
+              )).toList(),
+        ),
+     );
+    }
+  }
