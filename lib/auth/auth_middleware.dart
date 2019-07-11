@@ -20,7 +20,7 @@ void _getFirebaseUserAction(Store<AppState> store, GetFirebaseUserAction action,
       password: store.state.authState.password);
   if (firebaseUser != null)
      store.dispatch(UpdateFirebaseUserAction(firebaseUser: firebaseUser));
-    // store.dispatch(NavigateToHomePage());
+     store.dispatch(NavigateToHomePage());
   next(action);
 }
 void _registerFirebaseUserAction(Store<AppState> store, RegisterFirebaseUserAction action, NextDispatcher next) async {

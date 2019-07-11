@@ -11,17 +11,7 @@ import 'home_actions.dart';
 class HomeScreen extends StatelessWidget {
 
 
-  Widget _content(BuildContext context, HomeViewModel homeViewModel) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        MyAppBar(),
-        NewsList(homeViewModel),
-        FilterSortButtons(),
-      ],
-    );
-  }
+
 
 
   @override
@@ -33,7 +23,7 @@ class HomeScreen extends StatelessWidget {
       body: StoreConnector<AppState, HomeViewModel>(
         converter: (store) => HomeViewModel.fromStore(store),
         builder: (context, homeViewModel) => _content(context, homeViewModel),
-        //onInit: _onInit,
+        onInit: _onInit,
       ),
     );
   }
@@ -43,6 +33,18 @@ class HomeScreen extends StatelessWidget {
  */
   _onInit(Store<AppState> store) {
     store.dispatch(GetNewsAction());
+  }
+
+  Widget _content(BuildContext context, HomeViewModel homeViewModel) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        MyAppBar(),
+        NewsList(homeViewModel),
+        FilterSortButtons(),
+      ],
+    );
   }
 }
 
