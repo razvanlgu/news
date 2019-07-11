@@ -1,3 +1,4 @@
+import 'package:news/entities/news_item.dart';
 import 'package:news/home/home_view_model.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 import 'home_actions.dart';
-import 'home_state.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -14,9 +14,9 @@ class HomeScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        _myAppBar(),
-        _newsList(homeViewModel),
-//        _filterSortButtons()
+        MyAppBar(),
+        NewsList(homeViewModel),
+        FilterSortButtons(),
       ],
     );
   }
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
 }
 
   // AppBar
-  class _myAppBar extends StatelessWidget{
+  class MyAppBar extends StatelessWidget{
 
     @override
     Widget build(BuildContext context) {
@@ -55,22 +55,45 @@ class HomeScreen extends StatelessWidget {
   }
 
   // News list
-  class _newsList extends StatelessWidget {
+  class NewsList extends StatelessWidget {
 
   final HomeViewModel model;
-
-  _newsList(this.model);
+  NewsList(this.model);
 
   @override
     Widget build(BuildContext context) {
       return Expanded(
         child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           children: model.news
-              .map((Item item) => RaisedButton(
-                child: Text(item.continut),
-                onPressed: () => print(item.continut),
+              .map((NewsItem item) => RaisedButton(
+                padding: EdgeInsets.all(0.0),
+                elevation: 5,
+                color: Colors.white,
+                child: Column(
+                  children: <Widget>[
+                    Image.network(item.imageUrl),
+                    Text(item.title),
+                  ],
+                ),
+                onPressed: () => print(item.title),
               )).toList(),
         ),
      );
     }
+  }
+
+  class FilterSortButtons extends StatelessWidget{
+    @override
+      Widget build(BuildContext context) {
+       return Container(
+         child: ButtonBar(
+           alignment: MainAxisAlignment.center,
+           children: <Widget>[
+             FlatButton(onPressed:() => print('SORT!!!!'), child: Text('Sort')),
+             FlatButton(onPressed:() => print('FILTER!!!!'), child: Text('Filter')),
+           ],
+         ),
+        );
+      }
   }

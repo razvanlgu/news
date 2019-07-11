@@ -57,8 +57,8 @@ class MyApp extends StatelessWidget {
         Routes.register:(context) => RegisterPage(),
       },
 //      home: LoginScreen(),
-//      home: HomeScreen(),
-      home: _handleCurrentScreen(),
+      home: HomeScreen(),
+//      home: _handleCurrentScreen(),
     );
   }
 
