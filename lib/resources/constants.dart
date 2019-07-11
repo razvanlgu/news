@@ -1,11 +1,9 @@
 
 
 class Routes {
-  /**
-   * Aici bagam toate routele
-   *
-   */
-}
+  static final login = '/login';
+  static final register= '/register';
+  }
 
 class Collections {
   /**

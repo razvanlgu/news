@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/redux/appstate.dart';
-import 'auth_screen.dart';
+import 'package:news/resources/constants.dart';
+import 'package:news/resources/keys.dart';
 import 'auth_view_model.dart';
 
 
 class RegisterPage extends StatelessWidget {
-  final GlobalKey<FormState> _formRegisterKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formRegisterKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class RegisterPage extends StatelessWidget {
                   _formRegisterKey.currentState.save();
                   await authViewModel.updateEmailPassword(email, password);
                   await authViewModel.registerFirebaseUser();
-                  await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                  await Keys.navKey.currentState.pushReplacementNamed(Routes.login);
                 },
                 child: Text('Register'),
               ),

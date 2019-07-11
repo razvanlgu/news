@@ -53,6 +53,8 @@ class MyApp extends StatelessWidget {
         buttonColor: Colors.deepOrange,
       ),
       routes: {
+        Routes.login:(context) => LoginScreen(),
+        Routes.register:(context) => RegisterPage(),
       },
 //      home: LoginScreen(),
 //      home: HomeScreen(),

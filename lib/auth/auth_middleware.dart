@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:redux/redux.dart';
 import 'auth_actions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 
@@ -21,10 +22,12 @@ void _getFirebaseUserAction(Store<AppState> store, GetFirebaseUserAction action,
   next(action);
 }
 void _registerFirebaseUserAction(Store<AppState> store, RegisterFirebaseUserAction action, NextDispatcher next) async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    FirebaseUser user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: store.state.authState.email,
       password: store.state.authState.password
   );
+
+    Firestore.instance.collection('users').document().setData({ 'userid': user.uid, 'email': '${ store.state.authState.email}' });
     next(action);
 }
 

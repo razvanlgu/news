@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/auth/register_screen.dart';
 import 'package:news/redux/appstate.dart';
+import 'package:news/resources/constants.dart';
+import 'package:news/resources/keys.dart';
 
 import 'auth_view_model.dart';
 
 
 class LoginScreen extends StatelessWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+ static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,10 @@ class LoginScreen extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>RegisterPage()));            },
+                  Keys.navKey.currentState.pushReplacementNamed(
+                      Routes.register);
+                },
+                 // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>RegisterPage()));            },
                 child: Text('Register'),
               )
             ],
