@@ -1,0 +1,2 @@
+class NavigateToProfileEditAction {}
+class NavigateToProfileScreenAction {}

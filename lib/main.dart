@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:news/user_profile/edit_profile_screen.dart';
+import 'package:news/user_profile/user_profile_screen.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +58,10 @@ class MyApp extends StatelessWidget {
         Routes.login:(context) => LoginScreen(),
         Routes.register:(context) => RegisterPage(),
         Routes.home:(context) => HomeScreen(),
+        Routes.profile:(context) => UserProfileScreen(),
+        Routes.editProfile:(context) => EditUserProfileScreen(),
+
+
       },
       home: _handleCurrentScreen(),
     );
@@ -66,7 +72,7 @@ class MyApp extends StatelessWidget {
       stream: FirebaseAuth.instance.onAuthStateChanged,
       builder: (BuildContext context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // Animatie de incarcare
+
           return Scaffold(
             body: Center(
               child: Theme(
