@@ -1,5 +1,6 @@
 import 'package:news/auth/auth_actions.dart';
 import 'package:news/auth/auth_middleware.dart';
+import 'package:news/home/home_middleware.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
 import 'package:news/resources/keys.dart';
@@ -9,7 +10,8 @@ import 'package:redux/redux.dart';
 List<Middleware<AppState>> middlewares() => [
   NavigationMiddleware(),
 ]
-  ..addAll(authMiddleware());
+  ..addAll(authMiddleware())
+  ..addAll(homeMiddleware());
 
 class NavigationMiddleware extends MiddlewareClass<AppState>{
   @override

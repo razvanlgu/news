@@ -1,21 +1,26 @@
 import 'package:meta/meta.dart';
+import 'package:news/entities/news_item.dart';
 
 @immutable
 class HomeState {
-   final String mesaj;
 
+  final List<NewsItem> news;
   // Constrctor
   HomeState({
-    this.mesaj
+    this.news,
   });
 
   factory HomeState.initial() =>
       HomeState(
-        mesaj: 'Acesta e un mesaj default :(',
+        news: List.unmodifiable(<NewsItem>[]),
       );
 
-  HomeState copyWith({String mesaj })  =>
+
+  HomeState copyWith({
+    List<NewsItem> news
+  }) =>
     HomeState(
-      mesaj: mesaj ?? this.mesaj,
-  );
+      news: news ?? this.news
+    );
+
 }
