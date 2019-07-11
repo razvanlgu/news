@@ -22,4 +22,14 @@ class UpdateFirebaseUserAction {
 class RegisterFirebaseUserAction{
 }
 
+class LogOutFirebaseUserAction {
+}
+
+class NavigateToLoginFirebaseUserAction {
+}
+class NavigateToHomePage {
+}
+
+
+
 
