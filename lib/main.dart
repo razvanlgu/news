@@ -13,6 +13,7 @@ import 'package:news/home/home_screen.dart';
 
 import 'auth/auth_screen.dart';
 import 'auth/register_screen.dart';
+import 'package:news/map/map_screen.dart';
 
 void main() async {
   // keep portrait mode always enabled
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
         Routes.register:(context) => RegisterPage(),
         Routes.home:(context) => HomeScreen(),
       },
-      home: _handleCurrentScreen(),
+      home: MapScreen(),
     );
   }
 
