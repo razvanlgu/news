@@ -4,6 +4,7 @@ import 'package:news/auth/register_screen.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
 import 'package:news/resources/keys.dart';
+import 'package:news/ui/news_drawer.dart';
 
 import 'auth_view_model.dart';
 
@@ -14,6 +15,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer:NewsDrawer(),
       body: Container(
         child: StoreConnector<AppState, AuthViewModel>(
           converter: (store) => AuthViewModel.fromStore(store),
@@ -57,6 +59,7 @@ class LoginScreen extends StatelessWidget {
                   _formKey.currentState.save();
                   await authViewModel.updateEmailPassword(email, password);
                   await authViewModel.getFirebaseUser();
+
                 },
                 child: authViewModel.firebaseUser != null
                     ? Text('Logged in')
