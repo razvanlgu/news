@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.login:(context) => LoginScreen(),
         Routes.register:(context) => RegisterPage(),
+        Routes.home:(context) => HomeScreen(),
       },
       home: _handleCurrentScreen(),
     );
@@ -91,7 +92,7 @@ class MyApp extends StatelessWidget {
         } else {          if (snapshot.hasData) {
           return HomeScreen();
         } else {
-          return LoginScreen(); // De modificat cu sscreenul de login
+          return LoginScreen();
         }
         }
       },

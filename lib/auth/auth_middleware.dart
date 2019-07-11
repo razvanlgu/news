@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 List<Middleware<AppState>> authMiddleware() => [
   TypedMiddleware<AppState, GetFirebaseUserAction>(_getFirebaseUserAction),
   TypedMiddleware<AppState, RegisterFirebaseUserAction>(_registerFirebaseUserAction),
+  TypedMiddleware<AppState, LogOutFirebaseUserAction>(_logOutFirebaseUser),
 ];
 
 // Initialize the user in the userState onFirstInit
@@ -18,7 +19,8 @@ void _getFirebaseUserAction(Store<AppState> store, GetFirebaseUserAction action,
       email: store.state.authState.email,
       password: store.state.authState.password);
   if (firebaseUser != null)
-    store.dispatch(UpdateFirebaseUserAction(firebaseUser: firebaseUser));
+     store.dispatch(UpdateFirebaseUserAction(firebaseUser: firebaseUser));
+    // store.dispatch(NavigateToHomePage());
   next(action);
 }
 void _registerFirebaseUserAction(Store<AppState> store, RegisterFirebaseUserAction action, NextDispatcher next) async {
@@ -29,6 +31,18 @@ void _registerFirebaseUserAction(Store<AppState> store, RegisterFirebaseUserActi
 
     Firestore.instance.collection('users').document().setData({ 'userid': user.uid, 'email': '${ store.state.authState.email}' });
     next(action);
+}
+
+void _logOutFirebaseUser(Store<AppState> store, LogOutFirebaseUserAction action, NextDispatcher next) async {
+
+  await FirebaseAuth.instance.signOut();
+  store.dispatch(UpdateFirebaseUserAction(firebaseUser: null, authenticated: false));
+  store.dispatch(NavigateToLoginFirebaseUserAction());
+
+  // Delete the sharedPreferences data
+  //store.dispatch(DeleteSharedPrefsAction());
+
+  next(action);
 }
 
 

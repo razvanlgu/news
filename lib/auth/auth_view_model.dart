@@ -11,14 +11,18 @@ class AuthViewModel {
   final Function(String email, String password) updateEmailPassword;
   final Function() getFirebaseUser;
   final Function() registerFirebaseUser;
+  final Function() logOut;
 
-  AuthViewModel({this.password, this.email, this.firebaseUser, this.updateEmailPassword, this.getFirebaseUser, this.registerFirebaseUser});
+  AuthViewModel({this.logOut,this.password, this.email, this.firebaseUser, this.updateEmailPassword, this.getFirebaseUser, this.registerFirebaseUser});
 
   factory AuthViewModel.fromStore(Store<AppState> store) {
     return AuthViewModel(
         email: store.state.authState.email,
         password: store.state.authState.password,
         firebaseUser: store.state.userState.firebaseUser,
+
+        logOut: () =>
+          store.dispatch(LogOutFirebaseUserAction()),
 
         updateEmailPassword: (String email,String password) =>
           store.dispatch(UpdateEmailPasswordAction(email:email, password:password)),
@@ -28,7 +32,6 @@ class AuthViewModel {
 
          registerFirebaseUser: () =>
           store.dispatch(RegisterFirebaseUserAction(),
-
 
     )
     );

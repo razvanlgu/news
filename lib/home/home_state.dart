@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 class HomeState {
-  final String mesaj;
+   final String mesaj;
 
   // Constrctor
   HomeState({
@@ -14,10 +14,8 @@ class HomeState {
         mesaj: 'Acesta e un mesaj default :(',
       );
 
-  HomeState copyWith({
-    String mesaj
-  }) =>
+  HomeState copyWith({String mesaj })  =>
     HomeState(
-    mesaj: mesaj ?? this.mesaj,
+      mesaj: mesaj ?? this.mesaj,
   );
 }
