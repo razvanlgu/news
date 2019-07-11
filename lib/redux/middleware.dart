@@ -1,4 +1,5 @@
 import 'package:news/auth/auth_middleware.dart';
+import 'package:news/home/home_middleware.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:redux/redux.dart';
 

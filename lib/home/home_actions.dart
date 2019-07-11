@@ -1,1 +1,1 @@
-class GetNewsAction() {}
+class GetNewsAction{}

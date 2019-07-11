@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
+import 'home_actions.dart';
 import 'home_state.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,7 +39,7 @@ class HomeScreen extends StatelessWidget {
  * Get all the news
  */
   _onInit(Store<AppState> store) {
-    store.dispatch(GetNews())
+    store.dispatch(GetNewsAction());
   }
 }
 
