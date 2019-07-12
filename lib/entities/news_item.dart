@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
 class NewsItem {
-  final int id;
+  final String id;
   final String title;
   final String summary;
   final String imageUrl;
@@ -18,7 +18,7 @@ class NewsItem {
   });
 
   NewsItem copyWith({
-    int id,
+    String id,
     String title,
     String summary,
     String imageUrl,
@@ -27,7 +27,11 @@ class NewsItem {
     }) {
     return NewsItem(
         id: id ?? this.id,
-        title: title ?? this.title
+        title: title ?? this.title,
+        summary: summary ?? this.summary,
+        imageUrl: imageUrl ?? this.imageUrl,
+        likes: likes ?? this.likes,
+        dislikes: dislikes ?? this.dislikes
     );
   }
 

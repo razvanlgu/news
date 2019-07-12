@@ -1,5 +1,6 @@
 import 'package:news/auth/auth_actions.dart';
 import 'package:news/auth/auth_middleware.dart';
+import 'package:news/home/home_actions.dart';
 import 'package:news/home/home_middleware.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
@@ -27,10 +28,12 @@ class NavigationMiddleware extends MiddlewareClass<AppState>{
       Keys.navKey.currentState.pop();
       Keys.navKey.currentState.pushReplacementNamed(Routes.home);
     }
+    if (action is NavigateToAddNewsPage) {
+      Keys.navKey.currentState.pushNamed(Routes.addNews);
+    }
     if (action is NavigateToProfileScreenAction) {
       Keys.navKey.currentState.pushNamed(Routes.profile);
     }
-
     next(action);
   }
 }

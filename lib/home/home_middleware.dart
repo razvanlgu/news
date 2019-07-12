@@ -13,16 +13,17 @@ List<Middleware<AppState>> homeMiddleware() => [
 void _getNewsAction(Store<AppState> store, GetNewsAction action, NextDispatcher next) async {
 
   QuerySnapshot snapshots = await Firestore.instance.collection('news').getDocuments();
-   List<NewsItem> news = snapshots.documents
+  List<NewsItem> news = snapshots.documents
       .map((DocumentSnapshot document) => NewsItem(
-        id: 1,
+        id: document.data['id'],
         title: document.data['title'],
         summary: document.data['summary'],
         imageUrl: document.data['imageUrl'],
         likes: document.data['likes'],
         dislikes: document.data['dislikes']
       )).toList();
-   if (news != null) {
-     store.dispatch(UpdateNewsAction(news: news));
-   }
+  if (news != null) {
+    store.dispatch(UpdateNewsAction(news: news));
+  }
+  next(action);
 }
