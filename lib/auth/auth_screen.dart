@@ -35,24 +35,40 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                TextFormField(
-                  validator: (input) {
-                    if (input.isEmpty) {
-                      return 'Please Type an email';
-                    }
-                  },
-                  onSaved: (input) => email = input,
-                  decoration: InputDecoration(labelText: 'Email'),
+                Container(
+                  padding: EdgeInsetsDirectional.only(top: 20.0),
+                  child: TextFormField(
+                    validator: (input) {
+                      if (input.isEmpty) {
+                        return 'Please Type an email';
+                      } else {
+                        return '';
+                      }
+                    },
+                    onSaved: (input) => email = input,
+                    decoration: InputDecoration(
+                        labelText: 'Email',
+                        hasFloatingPlaceholder: false
+                    ),
+                  ),
                 ),
-                TextFormField(
-                  obscureText: true,
-                  validator: (input) {
-                    if (input.isEmpty) {
-                      return 'Please Type a password';
-                    }
-                  },
-                  onSaved: (input) => password = input,
-                  decoration: InputDecoration(labelText: 'Password'),
+                Container(
+                  padding: EdgeInsetsDirectional.only(top: 15.0),
+                  child: TextFormField(
+                      obscureText: true,
+                      validator: (input) {
+                        if (input.isEmpty) {
+                          return 'Please Type a password';
+                        } else {
+                          return '';
+                        }
+                      },
+                    onSaved: (input) => password = input,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      hasFloatingPlaceholder: false,
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
