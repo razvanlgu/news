@@ -46,7 +46,7 @@ class NewsDrawer extends StatelessWidget {
             ),
             onTap: onTap == null
                 ? () {
-              Navigator.pop(context);
+              //Navigator.pop(context);
               Navigator.pushNamed(context, route);
             }
                 : onTap,

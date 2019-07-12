@@ -17,7 +17,7 @@ class AppState {
     this.homeState,
     this.authState,
     this.userState,
-    this.addNewsState
+    this.addNewsState,
     this.userProfileState,
   });
 
@@ -26,7 +26,7 @@ class AppState {
       homeState: HomeState.initial(),
       authState: AuthState.initial(),
       userState: UserState.initial(),
-      addNewsState: AddNewsState.initial()
+      addNewsState: AddNewsState.initial(),
       userProfileState: UserProfileState.initial(),
     );
   }
