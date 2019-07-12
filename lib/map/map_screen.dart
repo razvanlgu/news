@@ -59,64 +59,6 @@ class MapScreenState extends State<MapScreen> {
     });
   }
 
-//  @override
-//  Widget build(BuildContext context) {
-//    return currentLocation == null
-//        ? Container(
-//            alignment: Alignment.center,
-//            child: Center(
-//              child: CircularProgressIndicator(),
-//            ),
-//          )
-//        : Stack(
-//            children: <Widget>[
-//              GoogleMap(
-//                initialCameraPosition: CameraPosition(
-//                    target: LatLng(
-//                        currentLocation.latitude, currentLocation.longitude),
-//                    zoom: 17),
-//                onMapCreated: _onMapCreated,
-//                myLocationEnabled: true,
-//                mapType: MapType.normal,
-//                markers: Set<Marker>.of(markers.values),
-//              ),
-//            ],
-//          );
-//  }
-
-//  void getData() {
-//    var ref = databaseReference.child('news').limitToFirst(15);
-//    StreamBuilder(
-//      stream: ref.onValue,
-//      builder: (context, snap) {
-//        if (snap.hasData && !snap.hasError && snap.data.snapshot.value != null) {
-//          DataSnapshot snapshot = snap.data.snapshot;
-//          List _list = [];
-//          _list = snapshot.value;
-//          _list.forEach((f){
-//            if (f != null) {
-//              InfoWindow infoWindow = InfoWindow(
-//                title: f['title'],
-//              );
-//              Marker marker = Marker(
-//                markerId: MarkerId(f),
-//                infoWindow: infoWindow,
-//                position: LatLng(
-//                  f['geopoints'].latitude,
-//                  f['geopoints'].longitude,
-//                ),
-//                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-//              );
-//              setState(() {
-//                markers.add(marker);
-//              });
-//            }
-//          });
-//        }
-//      }
-//    );
-//  }
-
   void _onMapCreated(GoogleMapController controller) {
     mapController.complete(controller);
   }
@@ -147,6 +89,15 @@ class MapScreenState extends State<MapScreen> {
             'News Map',
             style: TextStyle(color: Colors.white),
           ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.refresh),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/map');
+                },
+              ),
+            ]
         ),
         body: Stack(
           children: <Widget>[

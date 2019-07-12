@@ -15,12 +15,13 @@ import 'package:news/home/home_screen.dart';
 
 import 'auth/auth_screen.dart';
 import 'auth/register_screen.dart';
+import 'map/map_screen.dart';
 
 void main() async {
   // keep portrait mode always enabled
   await SystemChrome.setPreferredOrientations([
-   // DeviceOrientation.portraitUp,
-   // DeviceOrientation.portraitDown
+   DeviceOrientation.portraitUp,
+  DeviceOrientation.portraitDown
   ]);
 
   // Store initialization
@@ -60,9 +61,9 @@ class MyApp extends StatelessWidget {
         Routes.home:(context) => HomeScreen(),
         Routes.profile:(context) => UserProfileScreen(),
         Routes.editProfile:(context) => EditUserProfileScreen(),
-
-
+        Routes.map:(context) => MapScreen(),
       },
+
       home: _handleCurrentScreen(),
     );
   }
@@ -92,10 +93,10 @@ class MyApp extends StatelessWidget {
                   },
                 ),
               ),
-
             ),
           );
-        } else {          if (snapshot.hasData) {
+        } else {
+          if (snapshot.hasData) {
           return HomeScreen();
         } else {
           return LoginScreen();

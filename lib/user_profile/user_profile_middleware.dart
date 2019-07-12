@@ -13,12 +13,12 @@ List<Middleware<AppState>> profileMiddleware () =>[
 void _getProfile(Store<AppState> store, GetProfileAction action, NextDispatcher next) async {
   FirebaseUser auth = await FirebaseAuth.instance.currentUser();
 
-  DocumentSnapshot snap = await Firestore.instance.collection('users').document(
-      auth.uid).get();
-  
-  UserDetails user= UserDetails.fromFirebase(snap);
-  
+  DocumentSnapshot snapshot = await Firestore.instance.collection('users').document(auth.uid).get();
+
+  UserDetails user= UserDetails.fromFirebase(snapshot);
+
   store.dispatch(GetProfileSuccessAction(user));
+
   
 }
 

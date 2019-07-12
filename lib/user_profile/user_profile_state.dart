@@ -10,6 +10,7 @@ class UserProfileState {
   factory UserProfileState.initial() =>
       UserProfileState(
           userDetails: UserDetails.initial(),
+
       );
 
   UserProfileState copyWith({UserDetails userDetails, String language}) =>

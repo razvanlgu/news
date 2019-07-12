@@ -38,25 +38,27 @@ class UserProfileScreen extends StatelessWidget {
     return Scaffold(
       body: StoreConnector<AppState, UserProfileViewModel> (
         converter: (store) => UserProfileViewModel.fromStore(store),
-        onInit: (store) => store.dispatch(GetProfileAction()),
+
         builder: (context, userProfileViewModel) =>
             _content(context, _screenHeight, userProfileViewModel),
+
+        onInit: (store) => store.dispatch(GetProfileAction()),
+
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/editProfile');
-        },
-        child: Icon(Icons.edit),
-        foregroundColor: Colors.white,
-      ),
+//      floatingActionButton: FloatingActionButton(
+//        onPressed: () {
+//          Navigator.pushNamed(context, '/editProfile');
+//        },
+//        child: Icon(Icons.edit),
+//        foregroundColor: Colors.white,
+//      ),
     );
   }
 
-  Widget _content(BuildContext context, double _screenHeight,
-      UserProfileViewModel userProfileViewModel) =>
+  Widget _content(BuildContext context, double _screenHeight, UserProfileViewModel userProfileViewModel) =>
       ScrollConfiguration(
-
         child: CustomScrollView(
+          physics: NeverScrollableScrollPhysics(),
           slivers: <Widget>[
             SliverAppBar(
               floating: false,
@@ -67,12 +69,10 @@ class UserProfileScreen extends StatelessWidget {
                 title: Text(
                   userProfileViewModel.userDetails.name ?? '',
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
                 ),
               ),
-              expandedHeight: _screenHeight * 0.15,
               iconTheme: IconThemeData(color: Colors.white),
             ),
             SliverToBoxAdapter(

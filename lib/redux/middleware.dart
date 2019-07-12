@@ -6,7 +6,6 @@ import 'package:news/resources/constants.dart';
 import 'package:news/resources/keys.dart';
 import 'package:news/user_profile/user_profile_middleware.dart';
 import 'package:redux/redux.dart';
-
 import 'actions.dart';
 
 
@@ -25,7 +24,7 @@ class NavigationMiddleware extends MiddlewareClass<AppState>{
       Keys.navKey.currentState.pushReplacementNamed(Routes.login);
     }
     if (action is NavigateToHomePage) {
-      //Keys.navKey.currentState.pop();
+      Keys.navKey.currentState.pop();
       Keys.navKey.currentState.pushReplacementNamed(Routes.home);
     }
     if (action is NavigateToProfileScreenAction) {

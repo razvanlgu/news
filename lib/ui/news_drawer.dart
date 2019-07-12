@@ -6,6 +6,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/auth/auth_view_model.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
+import 'package:news/user_profile/user_profile_actions.dart';
 
 
 class NewsDrawer extends StatelessWidget {
@@ -14,7 +15,7 @@ class NewsDrawer extends StatelessWidget {
     return Drawer(
       child: StoreConnector<AppState, AuthViewModel>(
         converter: (store) => AuthViewModel.fromStore(store),
-       // onInit: (store) => store.dispatch(FetchProfileAction()),
+        onInit: (store) => store.dispatch(GetProfileAction()),
         builder: (context, authViewModel) => _content(context, authViewModel),
       ),
       );
@@ -27,7 +28,7 @@ class NewsDrawer extends StatelessWidget {
       return Material(
         // color:
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 20, 0, 0),
+          padding: const EdgeInsets.fromLTRB(8, 25, 0, 25),
           child: InkWell(
             splashColor: Colors.deepOrangeAccent,
             child: Row(
@@ -57,15 +58,15 @@ class NewsDrawer extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap:() {
-              Navigator.pop(context);
+              //Navigator.pop(context);
               Navigator.pushNamed(context, '/profile');
           },
+
            child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height/4,
-                //child:Text('Header'),
                 decoration: BoxDecoration(
-                backgroundBlendMode: BlendMode.clear,
+               // backgroundBlendMode: BlendMode.clear,
                 image: DecorationImage(
                   fit: BoxFit.fill,
                   colorFilter:  ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
@@ -74,9 +75,36 @@ class NewsDrawer extends StatelessWidget {
                   ),
                  ),
                 color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left:40,right:50),
+                child: Row(
+                  children: <Widget>[
+                   Padding(
+                     padding: const EdgeInsets.only(right:20),
+                     child: CircleAvatar(
+                          backgroundImage: NetworkImage('https://www.cropib.com/themes/cropib/assets/images/placeholder/no_image_available.png')
+                          ),
+                   ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Text('${authViewModel.email}'),
+                          Container(
+                            child: FlatButton(onPressed: (){
+                              //Navigator.pop(context);
+                              Navigator.pushNamed(context, Routes.profile);
+                            },
+                                child: Text("Edit Profile")
+                            ),
+                          )
+                        ]
+                      ),
+                  ],
+                ),
 
               ),
-
             ),
           ),
           Container(
@@ -87,22 +115,23 @@ class NewsDrawer extends StatelessWidget {
             ),
             child:Column(
                 children: <Widget>[
+                  _drawerTile(
+                      route:Routes.home,
+                      name:'News',
+                      icon:Icons.library_books
+                  ) ,
+//
 
                    _drawerTile(
-                     route:Routes.login,
-                     name:'Log In',
-                     icon:Icons.account_circle
+                     route:Routes.map,
+                     name:'News Map',
+                     icon:Icons.map
                    ) ,
-                  _drawerTile(
-                      route:Routes.register,
-                      name:'Register',
-                      icon:Icons.account_circle
-                  ),
+//
                   Container(
                     child: _drawerTile(
-                        //route:Routes.login,
-                        name:'LogOut',
-                      //  icon:Icons.account_circle
+                      name:'LogOut',
+                      icon:Icons.account_circle,
                       onTap:authViewModel.logOut,
                     ),
 
