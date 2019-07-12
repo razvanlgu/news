@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/redux/appstate.dart';
+import 'package:news/resources/constants.dart';
 import 'package:redux/redux.dart';
 
 import 'add_news_view_model.dart';
@@ -64,6 +65,7 @@ class AddNewsForm extends StatelessWidget {
     return Expanded(
       child: Container(
         child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 30.0),
           children: <Widget>[
             Form(
               key: _formKey,
@@ -71,27 +73,60 @@ class AddNewsForm extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  TextFormField(
-                    validator: (input) {
-                      if (input.isEmpty) {
-                        return 'Please Type a title';
-                      }
-                    },
-                    onSaved: (input) => _title = input,
-                    decoration: InputDecoration(
-                      labelText: 'Title',
-                      border: OutlineInputBorder()
+                  // Title
+                  Container(
+                    padding: EdgeInsets.only(bottom: 15.0),
+                    child: TextFormField(
+                      validator: (input) {
+                        if (input.isEmpty) {
+                          return 'Please type a title';
+                        }
+                      },
+                      onSaved: (input) => _title = input,
+                      decoration: InputDecoration(
+                        labelText: 'Title',
+                        hasFloatingPlaceholder: false,
+                      ),
+                      cursorColor: NewsColors.textBorderColorEnabled,
+                      maxLines: null,
                     ),
                   ),
-                  TextFormField(
-                    obscureText: true,
-                    validator: (input) {
-                      if (input.isEmpty) {
-                        return 'Please Type a password';
-                      }
-                    },
-                    onSaved: (input) => password = input,
-                    decoration: InputDecoration(labelText: 'Password'),
+
+                  // Summary
+                  Container(
+                    padding: EdgeInsets.only(bottom: 15.0),
+                    child: TextFormField(
+                      validator: (input) {
+                        if (input.isEmpty) {
+                          return 'Please type a summary';
+                        }
+                      },
+                      onSaved: (input) => _title = input,
+                      decoration: InputDecoration(
+                        labelText: 'Summary',
+                        hasFloatingPlaceholder: false,
+                      ),
+                      cursorColor: NewsColors.textBorderColorEnabled,
+                      maxLines: null,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(bottom: 15.0),
+                    child: TextFormField(
+                      validator: (input) {
+                        if (input.isEmpty) {
+                          return 'Please type some content';
+                        }
+                      },
+                      onSaved: (input) => _title = input,
+                      decoration: InputDecoration(
+                        labelText: 'Content',
+                        alignLabelWithHint: true,
+                        hasFloatingPlaceholder: false,
+                      ),
+                      cursorColor: NewsColors.textBorderColorEnabled,
+                      maxLines: 3,
+                    ),
                   ),
                   RaisedButton(
                     onPressed: () async {

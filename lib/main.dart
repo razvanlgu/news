@@ -51,7 +51,45 @@ class MyApp extends StatelessWidget {
 
       // Theme
       theme: ThemeData(
-        buttonColor: Colors.deepOrange,
+        hintColor: NewsColors.textBorderColorEnabled,
+
+        // Theme for AppBar
+        appBarTheme: AppBarTheme(
+          brightness: Brightness.dark,
+          color: NewsColors.textBorderColorEnabled,
+        ),
+
+        // Theme for text input
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: NewsColors.textBorderColorEnabled,
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 17.0),
+          hasFloatingPlaceholder: false,
+          filled: true,
+          fillColor: NewsColors.textFillColorFocused,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: NewsColors.textBorderColorFocused, width: 4.0),
+            borderRadius: BorderRadius.all(
+              Radius.circular(30.0),
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: NewsColors.textBorderColorEnabled, width: 3.0),
+            borderRadius: BorderRadius.all(
+              Radius.circular(30.0),
+            ),
+          ),
+        ),
+
+        // Theme for buttons
+        buttonTheme: ButtonThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)
+          ),
+          buttonColor: NewsColors.textBorderColorFocused,
+          textTheme: ButtonTextTheme.primary
+        ),
       ),
       routes: {
         Routes.login:(context) => LoginScreen(),
