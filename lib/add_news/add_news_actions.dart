@@ -13,3 +13,6 @@ class UpdateAddedNewsAction{
     this.content
   });
 }
+
+class AddNewsToFirebaseAction{
+}

@@ -3,6 +3,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
 import 'package:redux/redux.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'add_news_view_model.dart';
 
@@ -58,7 +60,8 @@ class AddNewsForm extends StatelessWidget {
   AddNewsForm(this.model);
 
   String _title;
-  String password;
+  String _summary;
+  String _content;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +104,7 @@ class AddNewsForm extends StatelessWidget {
                           return 'Please type a summary';
                         }
                       },
-                      onSaved: (input) => _title = input,
+                      onSaved: (input) => _summary = input,
                       decoration: InputDecoration(
                         labelText: 'Summary',
                         hasFloatingPlaceholder: false,
@@ -116,9 +119,11 @@ class AddNewsForm extends StatelessWidget {
                       validator: (input) {
                         if (input.isEmpty) {
                           return 'Please type some content';
+                        } else {
+                          return '';
                         }
                       },
-                      onSaved: (input) => _title = input,
+                      onSaved: (input) => _content = input,
                       decoration: InputDecoration(
                         labelText: 'Content',
                         alignLabelWithHint: true,
@@ -130,7 +135,21 @@ class AddNewsForm extends StatelessWidget {
                   ),
                   RaisedButton(
                     onPressed: () async {
+                      var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
+                    },
+                    child: Text('Image'),
+                  ),
+                  RaisedButton(
+                    onPressed: () async {
                       _formKey.currentState.save();
+                      model.updateAddedNews(
+                        _title,
+                        _summary,
+                        null,
+                        _content
+                      );
+                      model.addNewsToFirebase();
+                      Navigator.pop(context);
                     },
                     child: Text('Submit'),
                   ),

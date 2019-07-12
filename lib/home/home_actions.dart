@@ -8,5 +8,11 @@ class UpdateNewsAction{
   UpdateNewsAction({this.news});
 }
 
+class ToggleNewsAction{
+  final int index;
+
+  ToggleNewsAction(this.index);
+}
+
 class NavigateToAddNewsPage {
 }
