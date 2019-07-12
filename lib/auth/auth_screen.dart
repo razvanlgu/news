@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:news/auth/register_screen.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
 import 'package:news/resources/keys.dart';
-import 'package:news/ui/news_drawer.dart';
 
 import 'auth_view_model.dart';
 
@@ -15,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer:NewsDrawer(),
+
       body: Container(
         child: StoreConnector<AppState, AuthViewModel>(
           converter: (store) => AuthViewModel.fromStore(store),
@@ -31,49 +29,53 @@ class LoginScreen extends StatelessWidget {
     return Center(
         child: Form(
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                validator: (input) {
-                  if (input.isEmpty) {
-                    return 'Please Type an email';
-                  }
-                },
-                onSaved: (input) => email = input,
-                decoration: InputDecoration(labelText: 'Email'),
-              ),
-              TextFormField(
-                obscureText: true,
-                validator: (input) {
-                  if (input.isEmpty) {
-                    return 'Please Type a password';
-                  }
-                },
-                onSaved: (input) => password = input,
-                decoration: InputDecoration(labelText: 'Password'),
-              ),
-              RaisedButton(
-                onPressed: () async {
-                  _formKey.currentState.save();
-                  await authViewModel.updateEmailPassword(email, password);
-                  await authViewModel.getFirebaseUser();
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                TextFormField(
+                  validator: (input) {
+                    if (input.isEmpty) {
+                      return 'Please Type an email';
+                    }
+                  },
+                  onSaved: (input) => email = input,
+                  decoration: InputDecoration(labelText: 'Email'),
+                ),
+                TextFormField(
+                  obscureText: true,
+                  validator: (input) {
+                    if (input.isEmpty) {
+                      return 'Please Type a password';
+                    }
+                  },
+                  onSaved: (input) => password = input,
+                  decoration: InputDecoration(labelText: 'Password'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: RaisedButton(
+                    onPressed: () async {
+                      _formKey.currentState.save();
+                      await authViewModel.updateEmailPassword(email, password);
+                      await authViewModel.getFirebaseUser();
 
-                },
-                child: authViewModel.firebaseUser != null
-                    ? Text('Logged in')
-                    : Text('Not Logged in'),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  Keys.navKey.currentState.pushReplacementNamed(
-                      Routes.register);
-                },
-                 // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>RegisterPage()));            },
-                child: Text('Register'),
-              )
-            ],
+                    },
+                    child: Text('Log in')
+
+                  ),
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    Keys.navKey.currentState.pushReplacementNamed(
+                        Routes.register);
+                  },
+                  child: Text('Register'),
+                )
+              ],
+            ),
           ),
         ));
   }
