@@ -55,7 +55,12 @@ class NewsDrawer extends StatelessWidget {
     }
     return ListView(
         children: <Widget>[
-            Container(
+          GestureDetector(
+            onTap:() {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/profile');
+          },
+           child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height/4,
                 //child:Text('Header'),
@@ -70,8 +75,10 @@ class NewsDrawer extends StatelessWidget {
                  ),
                 color: Colors.white,
 
-              )
+              ),
+
             ),
+          ),
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height*3/4,
@@ -80,6 +87,7 @@ class NewsDrawer extends StatelessWidget {
             ),
             child:Column(
                 children: <Widget>[
+
                    _drawerTile(
                      route:Routes.login,
                      name:'Log In',
