@@ -7,3 +7,6 @@ class UpdateNewsAction{
 
   UpdateNewsAction({this.news});
 }
+
+class NavigateToAddNewsPage {
+}

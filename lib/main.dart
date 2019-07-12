@@ -11,6 +11,7 @@ import 'package:news/resources/keys.dart';
 import 'package:news/resources/constants.dart';
 import 'package:news/home/home_screen.dart';
 
+import 'add_news/add_news_screen.dart';
 import 'auth/auth_screen.dart';
 import 'auth/register_screen.dart';
 
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         Routes.login:(context) => LoginScreen(),
         Routes.register:(context) => RegisterPage(),
         Routes.home:(context) => HomeScreen(),
+        Routes.addNews:(context) => AddNewsScreen(),
       },
       home: _handleCurrentScreen(),
     );
