@@ -5,6 +5,7 @@ import 'auth_actions.dart';
 
 class AuthViewModel {
   final String email;
+  final String userEmail;
   final String password;
   final FirebaseUser firebaseUser;
 
@@ -13,11 +14,13 @@ class AuthViewModel {
   final Function() registerFirebaseUser;
   final Function() logOut;
 
-  AuthViewModel({this.logOut,this.password, this.email, this.firebaseUser, this.updateEmailPassword, this.getFirebaseUser, this.registerFirebaseUser});
+  AuthViewModel({this.logOut,this.password, this.email, this.firebaseUser,
+    this.updateEmailPassword, this.getFirebaseUser, this.registerFirebaseUser, this.userEmail});
 
   factory AuthViewModel.fromStore(Store<AppState> store) {
     return AuthViewModel(
         email: store.state.authState.email,
+        userEmail: store.state.userProfileState.userDetails.email,
         password: store.state.authState.password,
         firebaseUser: store.state.userState.firebaseUser,
 

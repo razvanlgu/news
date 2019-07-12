@@ -62,6 +62,10 @@ class LoginScreen extends StatelessWidget {
                       await authViewModel.updateEmailPassword(email, password);
                       await authViewModel.getFirebaseUser();
 
+                   if(authViewModel.firebaseUser == null){
+                        _showAlertDraw(context);
+                   }
+
                     },
                     child: Text('Log in')
 
@@ -79,4 +83,23 @@ class LoginScreen extends StatelessWidget {
           ),
         ));
   }
+ Future _showAlertDraw(BuildContext context) async {
+   return  showDialog(
+       barrierDismissible: false,
+       context: context,
+       builder: (BuildContext context) {
+         return AlertDialog(
+
+           title:  Text('Wrong email or password'),
+           actions: <Widget>[
+             new FlatButton(onPressed: () {
+               Navigator.pop(context);
+
+             },
+                 child:  Text('Try again'))
+           ],
+         );}
+
+   );
+ }
 }

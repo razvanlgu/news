@@ -17,8 +17,8 @@ class SaveProfileAction {
 
   SaveProfileAction({this.userDetails});
 }
-class NavigateToLoginFirebaseUserAction {
-}
-class NavigateToHomePage {
+
+class NavigateToHomeScreenActionAction {
+
 }
 

@@ -15,7 +15,7 @@ void _getProfile(Store<AppState> store, GetProfileAction action, NextDispatcher 
 
   DocumentSnapshot snapshot = await Firestore.instance.collection('users').document(auth.uid).get();
 
-  UserDetails user= UserDetails.fromFirebase(snapshot);
+  UserDetails user = UserDetails.fromFirebase(snapshot);
 
   store.dispatch(GetProfileSuccessAction(user));
 
@@ -27,6 +27,6 @@ void _saveProfile(Store<AppState> store, SaveProfileAction action, NextDispatche
   
   await Firestore.instance.collection('users').document(auth.uid).updateData(action.userDetails.toMap());
   
-  store.dispatch(NavigateToHomePage());
+  store.dispatch(NavigateToHomeScreenActionAction());
   next(action);
 }
