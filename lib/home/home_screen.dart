@@ -13,10 +13,7 @@ import 'home_actions.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-//    _screenWidth = MediaQuery.of(context).size.width;
-//    _screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      drawer: NewsDrawer(),
       body: StoreConnector<AppState, HomeViewModel>(
         converter: (store) => HomeViewModel.fromStore(store),
         builder: (context, homeViewModel) => _content(context, homeViewModel),
@@ -33,41 +30,39 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _content(BuildContext context, HomeViewModel homeViewModel) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        MyAppBar(homeViewModel),
-        NewsList(homeViewModel),
-        FilterSortButtons(),
-      ],
-    );
-  }
-}
+    double _screenWidth = MediaQuery.of(context).size.width;
+    double _screenHeight = MediaQuery.of(context).size.height;
 
-// AppBar
-class MyAppBar extends StatelessWidget {
-  final HomeViewModel model;
-  MyAppBar(this.model);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.add_circle),
-          tooltip: 'Add news',
-          onPressed: () => model.addNews(),
-        ),
-      ],
+    return Scaffold(
+      drawer: NewsDrawer(),
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add_circle),
+            tooltip: 'Add news',
+            onPressed: () => homeViewModel.addNews(),
+          ),
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          NewsList(_screenHeight, homeViewModel),
+          FilterSortButtons(),
+        ],
+      ),
     );
   }
 }
 
 // News list
 class NewsList extends StatelessWidget {
+  final double _screenHeight;
   final HomeViewModel model;
-  NewsList(this.model);
+  NewsList(this._screenHeight, this.model);
+
+  int _counter = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -75,22 +70,53 @@ class NewsList extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         children: model.news
-            .map((NewsItem item) => Container(
+            .map((NewsItem item) {
+              _counter++;
+              return Container(
                   margin: EdgeInsetsDirectional.only(top: 15.0),
                   child: RaisedButton(
+                    clipBehavior: Clip.hardEdge,
                     padding: EdgeInsets.all(0.0),
                     elevation: 10,
                     color: Colors.white,
                     child: Column(
                       children: <Widget>[
-                        Image.network(item.imageUrl),
-                        Text(item.title),
+                        Container(
+                          height: 0.21 * _screenHeight,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                alignment: FractionalOffset.topCenter,
+                                image: NetworkImage(item.imageUrl),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+                          child: Text(
+                            item.title,
+                            style: TextStyle(
+                              fontSize: 22.0,
+                            ),
+                          ),
+                        ),
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 400),
+                          height: model.expandHeight,
+                          padding: EdgeInsetsDirectional.only(start: 15.0, end: 15.0, bottom: 10),
+                          child: Text(
+                            item.summary,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                    onPressed: () => print(item.title),
+                    onPressed: () => model.toggleNews(_counter),
                   ),
-                ))
-            .toList(),
+                );
+        }).toList(),
       ),
     );
   }

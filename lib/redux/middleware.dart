@@ -1,3 +1,4 @@
+import 'package:news/add_news/add_news_middleware.dart';
 import 'package:news/auth/auth_actions.dart';
 import 'package:news/auth/auth_middleware.dart';
 import 'package:news/home/home_actions.dart';
@@ -16,7 +17,8 @@ List<Middleware<AppState>> middlewares() => [
 ]
   ..addAll(authMiddleware())
   ..addAll(homeMiddleware())
-  ..addAll(profileMiddleware());
+  ..addAll(profileMiddleware())
+  ..addAll(addNewsMiddleware());
 
 class NavigationMiddleware extends MiddlewareClass<AppState>{
   @override

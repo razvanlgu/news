@@ -15,7 +15,7 @@ void _getNewsAction(Store<AppState> store, GetNewsAction action, NextDispatcher 
   QuerySnapshot snapshots = await Firestore.instance.collection('news').getDocuments();
   List<NewsItem> news = snapshots.documents
       .map((DocumentSnapshot document) => NewsItem(
-        id: document.data['id'],
+        id: document.documentID,
         title: document.data['title'],
         summary: document.data['summary'],
         imageUrl: document.data['imageUrl'],

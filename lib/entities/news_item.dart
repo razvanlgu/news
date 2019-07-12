@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 
 class NewsItem {
   final String id;
-  final String title;
+   String title;
   final String summary;
   final String imageUrl;
   final int likes;

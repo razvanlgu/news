@@ -12,7 +12,7 @@ AddNewsState _updateAddedNewsAction(AddNewsState state, UpdateAddedNewsAction ac
     state.copyWith(
       id: action.id,
       title: action.title,
-      summary: action.title,
+      summary: action.summary,
       imageUrl: action.imageUrl,
       content: action.content
     );
