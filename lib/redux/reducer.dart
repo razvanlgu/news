@@ -10,6 +10,6 @@ AppState appReducer(AppState state, dynamic action) =>
       userState: userReducer(state.userState , action),
       authState: authReducer(state.authState, action),
       homeState: homeReducer(state.homeState, action),
-      addNewsState: addNewsReducer(state.addNewsState, action)
+      addNewsState: addNewsReducer(state.addNewsState, action),
       userProfileState: userProfileReducer(state.userProfileState, action),
     );

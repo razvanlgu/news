@@ -22,13 +22,13 @@ class NewsDrawer extends StatelessWidget {
 
   }
   Widget _content(BuildContext context, AuthViewModel authViewModel) {
-
+double _height = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).viewInsets.top;
     Widget _drawerTile(
         {String route, String name, IconData icon, VoidCallback onTap}) {
       return Material(
         // color:
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 25, 0, 25),
+          padding: const EdgeInsets.fromLTRB(8, 20, 0, 20),
           child: InkWell(
             splashColor: Colors.deepOrangeAccent,
             child: Row(
@@ -37,10 +37,11 @@ class NewsDrawer extends StatelessWidget {
                 Icon(
                   icon,
                   //  color:
-                  size: 20.0,
+                  size: 30.0,
                 ),
                 Text(
                   name,
+                  style: TextStyle(fontSize: 18),
                 ),
               ],
             ),
@@ -64,9 +65,8 @@ class NewsDrawer extends StatelessWidget {
 
            child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height/4,
+                height: _height/5,
                 decoration: BoxDecoration(
-               // backgroundBlendMode: BlendMode.clear,
                 image: DecorationImage(
                   fit: BoxFit.fill,
                   colorFilter:  ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
@@ -90,7 +90,11 @@ class NewsDrawer extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-                          Text('${authViewModel.email}'),
+                          Text(
+                            authViewModel.email == '' ? '${authViewModel.userEmail}' : '${authViewModel.email}',
+                            style:DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.3),
+                       ),
+
                           Container(
                             child: FlatButton(onPressed: (){
                               //Navigator.pop(context);
@@ -109,9 +113,8 @@ class NewsDrawer extends StatelessWidget {
           ),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height*3/4,
+            height: _height*4/5,
             decoration: BoxDecoration(
-              color: Colors.white,
             ),
             child:Column(
                 children: <Widget>[
@@ -119,22 +122,24 @@ class NewsDrawer extends StatelessWidget {
                       route:Routes.home,
                       name:'News',
                       icon:Icons.library_books
-                  ) ,
-//
+                  ) ,//
 
                    _drawerTile(
                      route:Routes.map,
                      name:'News Map',
                      icon:Icons.map
                    ) ,
+                  Expanded(
+                    child: Container(),
+                  ),
 //
                   Container(
+                    alignment: Alignment.bottomCenter,
                     child: _drawerTile(
                       name:'LogOut',
                       icon:Icons.account_circle,
                       onTap:authViewModel.logOut,
                     ),
-
 
                   )
                 ]

@@ -41,9 +41,10 @@ class MapScreenState extends State<MapScreen> {
     var markerIDVal = markerRef;
     final MarkerId markerId = MarkerId(markerIDVal);
 
-    //new marker
-
     InfoWindow infoWindow = InfoWindow(
+      onTap: (){
+
+      },
       title: client['title'],
     );
     final Marker marker = Marker(
@@ -52,6 +53,7 @@ class MapScreenState extends State<MapScreen> {
       markerId: markerId,
       infoWindow: infoWindow,
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+
     );
 
     setState(() {
@@ -68,7 +70,7 @@ class MapScreenState extends State<MapScreen> {
       _currentMapType = _currentMapType == MapType.normal
           ? MapType.satellite
           : MapType.normal;
-      print("dddd" + _currentMapType.toString());
+     // print("dddd" + _currentMapType.toString());
     });
   }
 
@@ -79,12 +81,13 @@ class MapScreenState extends State<MapScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
-        primaryColor: const Color(0xFF02BB9F),
-        primaryColorDark: const Color(0xFF167F67),
-        accentColor: const Color(0xFF02BB9F),
       ),
       home: Scaffold(
         appBar: AppBar(
+          leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
+            Navigator.pop(context);
+          }),
+
           title: Text(
             'News Map',
             style: TextStyle(color: Colors.white),

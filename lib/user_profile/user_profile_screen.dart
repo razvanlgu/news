@@ -14,7 +14,6 @@ class UserProfileScreen extends StatelessWidget {
           style: TextStyle(
               fontSize: _fontSize,
               fontWeight: FontWeight.w700,
-
           ),
         ),
         subtitle: Text(
@@ -27,7 +26,6 @@ class UserProfileScreen extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(
           horizontal: 30.0,
         ),
-        dense: true,
       ),
     );
   }
@@ -45,68 +43,66 @@ class UserProfileScreen extends StatelessWidget {
         onInit: (store) => store.dispatch(GetProfileAction()),
 
       ),
-//      floatingActionButton: FloatingActionButton(
-//        onPressed: () {
-//          Navigator.pushNamed(context, '/editProfile');
-//        },
-//        child: Icon(Icons.edit),
-//        foregroundColor: Colors.white,
-//      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/editProfile');
+        },
+        child: Icon(Icons.edit),
+        foregroundColor: Colors.white,
+      ),
     );
   }
 
   Widget _content(BuildContext context, double _screenHeight, UserProfileViewModel userProfileViewModel) =>
-      ScrollConfiguration(
-        child: CustomScrollView(
-          physics: NeverScrollableScrollPhysics(),
-          slivers: <Widget>[
-            SliverAppBar(
-              floating: false,
-              pinned: true,
-              backgroundColor: Theme.of(context).primaryColor,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text(
-                  userProfileViewModel.userDetails.name ?? '',
-                  style: TextStyle(
-                    color: Colors.white,
+      CustomScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        slivers: <Widget>[
+          SliverAppBar(
+            floating: false,
+            pinned: true,
+            backgroundColor: Theme.of(context).primaryColor,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(
+                userProfileViewModel.userDetails.name ?? '',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            iconTheme: IconThemeData(color: Colors.white),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              constraints: BoxConstraints(
+                minHeight: _screenHeight
+                    - MediaQuery.of(context).padding.top
+                    - AppBar().preferredSize.height,
+              ),
+              child: Column(
+                children: <Widget>[
+                  tile(
+                    'Name',
+                    userProfileViewModel.userDetails.name ?? '',
+                    _screenHeight * 0.02,
+                    userProfileViewModel.userDetails.name != null,
                   ),
-                ),
-              ),
-              iconTheme: IconThemeData(color: Colors.white),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                constraints: BoxConstraints(
-                  minHeight: _screenHeight
-                      - MediaQuery.of(context).padding.top
-                      - AppBar().preferredSize.height,
-                ),
-                child: Column(
-                  children: <Widget>[
-                    tile(
-                      'Name',
-                      userProfileViewModel.userDetails.name ?? '',
-                      _screenHeight * 0.02,
-                      userProfileViewModel.userDetails.name != null,
-                    ),
-                    tile(
-                      'Email',
-                      userProfileViewModel.userDetails.email ?? '',
-                      _screenHeight * 0.02,
-                      userProfileViewModel.userDetails.email != null,
-                    ),
-                    tile(
-                      'Phone Number',
-                      userProfileViewModel.userDetails.phoneNumber ?? '',
-                      _screenHeight * 0.02,
-                      userProfileViewModel.userDetails.phoneNumber != null,
-                    ),
-                  ],
-                ),
+                  tile(
+                    'Email',
+                    userProfileViewModel.userDetails.email ?? '',
+                    _screenHeight * 0.02,
+                    userProfileViewModel.userDetails.email != null,
+                  ),
+                  tile(
+                    'Phone Number',
+                    userProfileViewModel.userDetails.phoneNumber ?? '',
+                    _screenHeight * 0.02,
+                    userProfileViewModel.userDetails.phoneNumber != null,
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       );
 }
