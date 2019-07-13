@@ -12,13 +12,16 @@ List<Middleware<AppState>> addNewsMiddleware() => [
 // Get all the news from database and put them in a List
 void _addNewsToFirebaseAction(Store<AppState> store, AddNewsToFirebaseAction action, NextDispatcher next) async {
   // Add the news Document
-   DocumentReference ref = await Firestore.instance.collection('news').add({
+  DocumentReference ref = await Firestore.instance.collection('news').document();
+  ref.setData({
+    'id' : ref.documentID,
     'title' : store.state.addNewsState.title,
     'summary' : store.state.addNewsState.summary,
     'imageUrl' : store.state.addNewsState.imageUrl,
     'likes' : 0,
     'dislikes' : 0,
   });
+  // Add the id of the news
    // Add the content Collection with the content and comment Collection
    ref.collection('content').add({'content' : store.state.addNewsState.content});
    ref.collection('comments');

@@ -7,14 +7,12 @@ import 'home_actions.dart';
 
 class HomeViewModel {
   final List<NewsItem> news;
-  final double expandHeight;
 
   final Function() addNews;
-  final Function(int index) toggleNews;
+  final Function(String id) toggleNews;
   // Constructor
   HomeViewModel({
     @required this.news,
-    @required this.expandHeight,
     @required this.addNews,
     @required this.toggleNews,
   });
@@ -22,9 +20,8 @@ class HomeViewModel {
   factory HomeViewModel.fromStore(Store<AppState> store) {
     return HomeViewModel(
       news: store.state.homeState.news,
-      expandHeight: store.state.homeState.expandHeight,
       addNews: () => store.dispatch(NavigateToAddNewsPage()),
-      toggleNews: (int index) => store.dispatch(ToggleNewsAction(index)),
+      toggleNews: (String id) => store.dispatch(ToggleNewsAction(id)),
     );
   }
 }

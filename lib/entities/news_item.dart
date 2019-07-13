@@ -2,11 +2,12 @@ import 'package:meta/meta.dart';
 
 class NewsItem {
   final String id;
-   String title;
+  final String title;
   final String summary;
   final String imageUrl;
   final int likes;
   final int dislikes;
+  final double expandHeight;
 
   NewsItem({
     @required this.id,
@@ -15,6 +16,7 @@ class NewsItem {
     @required this.imageUrl,
     @required this.likes,
     @required this.dislikes,
+    @required this.expandHeight,
   });
 
   NewsItem copyWith({
@@ -23,7 +25,8 @@ class NewsItem {
     String summary,
     String imageUrl,
     int likes,
-    int dislikes
+    int dislikes,
+    double expandHeight
     }) {
     return NewsItem(
         id: id ?? this.id,
@@ -31,7 +34,8 @@ class NewsItem {
         summary: summary ?? this.summary,
         imageUrl: imageUrl ?? this.imageUrl,
         likes: likes ?? this.likes,
-        dislikes: dislikes ?? this.dislikes
+        dislikes: dislikes ?? this.dislikes,
+        expandHeight: expandHeight ?? this.expandHeight,
     );
   }
 

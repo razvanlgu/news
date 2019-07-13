@@ -20,7 +20,8 @@ void _getNewsAction(Store<AppState> store, GetNewsAction action, NextDispatcher 
         summary: document.data['summary'],
         imageUrl: document.data['imageUrl'],
         likes: document.data['likes'],
-        dislikes: document.data['dislikes']
+        dislikes: document.data['dislikes'],
+        expandHeight: 0.0,
       )).toList();
   if (news != null) {
     store.dispatch(UpdateNewsAction(news: news));

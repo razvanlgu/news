@@ -9,9 +9,9 @@ class UpdateNewsAction{
 }
 
 class ToggleNewsAction{
-  final int index;
+  final String id;
 
-  ToggleNewsAction(this.index);
+  ToggleNewsAction(this.id);
 }
 
 class NavigateToAddNewsPage {

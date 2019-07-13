@@ -62,8 +62,6 @@ class NewsList extends StatelessWidget {
   final HomeViewModel model;
   NewsList(this._screenHeight, this.model);
 
-  int _counter = -1;
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -71,7 +69,6 @@ class NewsList extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         children: model.news
             .map((NewsItem item) {
-              _counter++;
               return Container(
                   margin: EdgeInsetsDirectional.only(top: 15.0),
                   child: RaisedButton(
@@ -102,7 +99,7 @@ class NewsList extends StatelessWidget {
                         ),
                         AnimatedContainer(
                           duration: Duration(milliseconds: 400),
-                          height: model.expandHeight,
+                          height: item.expandHeight,
                           padding: EdgeInsetsDirectional.only(start: 15.0, end: 15.0, bottom: 10),
                           child: Text(
                             item.summary,
@@ -113,7 +110,7 @@ class NewsList extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () => model.toggleNews(_counter),
+                    onPressed: () => model.toggleNews(item.id),
                   ),
                 );
         }).toList(),

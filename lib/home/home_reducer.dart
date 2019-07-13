@@ -1,3 +1,4 @@
+import 'package:news/entities/news_item.dart';
 import 'package:redux/redux.dart';
 
 import 'home_actions.dart';
@@ -12,9 +13,15 @@ HomeState _updateNewsAction(HomeState state, UpdateNewsAction action) =>
     state.copyWith(news: action.news);
 
 HomeState _toggleNewsAction(HomeState state, ToggleNewsAction action) {
-  if (state.expandHeight == 0.0) {
-    return state.copyWith(expandHeight: 200.0);
-  } else {
-    return state.copyWith(expandHeight: 0.0);
-  }
+  List<NewsItem> toggledList = state.news.map((NewsItem item) {
+    if (item.id == action.id) {
+      if (item.expandHeight == 0.0) {
+        return item.copyWith(expandHeight: 200.0);
+      } else {
+        return item.copyWith(expandHeight: 0.0);
+      }
+    }
+    return item.copyWith();
+  }).toList();
+  return state.copyWith(news: toggledList);
 }
