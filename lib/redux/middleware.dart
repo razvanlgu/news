@@ -3,6 +3,7 @@ import 'package:news/auth/auth_actions.dart';
 import 'package:news/auth/auth_middleware.dart';
 import 'package:news/home/home_actions.dart';
 import 'package:news/home/home_middleware.dart';
+import 'package:news/page/page_middleware.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
 import 'package:news/resources/keys.dart';
@@ -18,7 +19,8 @@ List<Middleware<AppState>> middlewares() => [
   ..addAll(authMiddleware())
   ..addAll(homeMiddleware())
   ..addAll(profileMiddleware())
-  ..addAll(addNewsMiddleware());
+  ..addAll(addNewsMiddleware())
+  ..addAll(pageMiddleware());
 
 class NavigationMiddleware extends MiddlewareClass<AppState>{
   @override
@@ -41,7 +43,9 @@ class NavigationMiddleware extends MiddlewareClass<AppState>{
     if (action is NavigateToProfileScreenAction) {
       Keys.navKey.currentState.pushNamed(Routes.profile);
     }
-
+    if (action is NavigateToNewsPage) {
+      Keys.navKey.currentState.pushNamed(Routes.newsPage);
+    }
     next(action);
   }
 }

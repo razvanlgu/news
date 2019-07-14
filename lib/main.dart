@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:news/page/page_screen.dart';
 import 'package:news/user_profile/edit_profile_screen.dart';
 import 'package:news/user_profile/user_profile_screen.dart';
 import 'package:redux/redux.dart';
@@ -102,6 +103,7 @@ class MyApp extends StatelessWidget {
         Routes.profile:(context) => UserProfileScreen(),
         Routes.editProfile:(context) => EditUserProfileScreen(),
         Routes.map:(context) => MapScreen(),
+        Routes.newsPage:(context) => PageScreen(),
       },
 
       home: _handleCurrentScreen(),

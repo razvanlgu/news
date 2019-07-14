@@ -118,7 +118,7 @@ class NewsList extends StatelessWidget {
                           ),
                           padding: EdgeInsetsDirectional.only(start: 15.0, end: 15.0, bottom: 10),
                           child: FlatButton(
-                              onPressed: () => print('GO TO THE NEWS!!'),
+                              onPressed: () => model.openNews(item.id),
                               color: NewsColors.textBorderColorFocused,
                               child: Text('View More'),
                           ),
