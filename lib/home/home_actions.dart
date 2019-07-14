@@ -14,5 +14,15 @@ class ToggleNewsAction{
   ToggleNewsAction(this.id);
 }
 
+class GetNewsPageAction{
+  final String id;
+
+  GetNewsPageAction(this.id);
+}
+
 class NavigateToAddNewsPage {
+}
+
+
+class NavigateToNewsPage {
 }

@@ -23,7 +23,7 @@ void _addNewsToFirebaseAction(Store<AppState> store, AddNewsToFirebaseAction act
   });
   // Add the id of the news
    // Add the content Collection with the content and comment Collection
-   ref.collection('content').add({'content' : store.state.addNewsState.content});
+   ref.collection('content').document('content').setData({'content' : store.state.addNewsState.content});
    ref.collection('comments');
   store.dispatch(GetNewsAction());
   next(action);
