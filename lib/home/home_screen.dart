@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/resources/constants.dart';
 import 'package:news/resources/keys.dart';
+import 'package:news/resources/news_icons_icons.dart';
 import 'package:news/ui/news_drawer.dart';
 import 'package:redux/redux.dart';
 
@@ -98,14 +99,64 @@ class NewsList extends StatelessWidget {
                           ),
                         ),
                         AnimatedContainer(
-                          duration: Duration(milliseconds: 400),
-                          height: item.expandHeight,
+                          duration: Duration(milliseconds: 600),
+                          constraints: BoxConstraints(
+                            maxHeight: item.expandHeight,
+                          ),
                           padding: EdgeInsetsDirectional.only(start: 15.0, end: 15.0, bottom: 10),
                           child: Text(
-                            item.summary,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
+                                item.summary,
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                        ),
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 600),
+                          constraints: BoxConstraints(
+                            maxHeight: item.expandHeight,
+                          ),
+                          padding: EdgeInsetsDirectional.only(start: 15.0, end: 15.0, bottom: 10),
+                          child: FlatButton(
+                              onPressed: () => print('GO TO THE NEWS!!'),
+                              color: NewsColors.textBorderColorFocused,
+                              child: Text('View More'),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsetsDirectional.only(start: 15.0, end: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                '${item.likes}',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              IconButton(
+                                color: Colors.black,
+                                icon: Icon(NewsIcons.like),
+                                onPressed: () => print('LIKE!!!'),
+                              ),
+                              Text(
+                                '${item.likes}',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(NewsIcons.dislike),
+                                onPressed: () => print('DISLIKE!!!'),
+                              ),
+                              Expanded(child: Container(),),
+                              IconButton(
+                                color: Colors.black,
+                                icon: Icon(Icons.favorite_border),
+                                onPressed: () => print('ADD TO FAVORITE!!!'),
+                              ),
+                            ],
                           ),
                         ),
                       ],
