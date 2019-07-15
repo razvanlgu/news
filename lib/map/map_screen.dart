@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import "package:location/location.dart";
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:news/resources/constants.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -84,9 +85,14 @@ class MapScreenState extends State<MapScreen> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
+          brightness: Brightness.dark,
+          backgroundColor: NewsColors.textBorderColorEnabled,
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
             Navigator.pop(context);
-          }),
+            }
+          ),
 
           title: Text(
             'News Map',
@@ -121,6 +127,7 @@ class MapScreenState extends State<MapScreen> {
               child: Align(
                 alignment: Alignment.bottomLeft,
                 child: new FloatingActionButton(
+                  backgroundColor: NewsColors.textBorderColorEnabled,
                   onPressed: _onMapTypeButtonPressed,
                   child: new Icon(
                     Icons.map,
