@@ -11,12 +11,14 @@ class HomeViewModel {
   final Function() addNews;
   final Function(String id) toggleNews;
   final Function(String id) openNews;
+  final Function() refresh;
   // Constructor
   HomeViewModel({
     @required this.news,
     @required this.addNews,
     @required this.toggleNews,
     @required this.openNews,
+    @required this.refresh,
   });
 
   factory HomeViewModel.fromStore(Store<AppState> store) {
@@ -25,6 +27,7 @@ class HomeViewModel {
       addNews: () => store.dispatch(NavigateToAddNewsPage()),
       toggleNews: (String id) => store.dispatch(ToggleNewsAction(id)),
       openNews: (String id) => store.dispatch(GetNewsPageAction(id)),
+      refresh: () => store.dispatch(GetNewsAction()),
     );
   }
 }
