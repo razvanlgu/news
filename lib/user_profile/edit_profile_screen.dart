@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/redux/appstate.dart';
+import 'package:news/resources/constants.dart';
 import 'package:news/user_profile/user_details.dart';
 import 'package:news/user_profile/user_profile_view_model.dart';
 

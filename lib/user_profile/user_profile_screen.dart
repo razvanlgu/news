@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/redux/appstate.dart';
+import 'package:news/resources/constants.dart';
 import 'package:news/user_profile/user_profile_actions.dart';
 import 'package:news/user_profile/user_profile_view_model.dart';
 
@@ -44,6 +45,7 @@ class UserProfileScreen extends StatelessWidget {
 
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: NewsColors.textBorderColorEnabled,
         onPressed: () {
           Navigator.pushNamed(context, '/editProfile');
         },
@@ -60,7 +62,8 @@ class UserProfileScreen extends StatelessWidget {
           SliverAppBar(
             floating: false,
             pinned: true,
-            backgroundColor: Theme.of(context).primaryColor,
+            brightness: Brightness.dark,
+            backgroundColor: NewsColors.textBorderColorEnabled,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(
