@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/redux/appstate.dart';
@@ -5,6 +6,7 @@ import 'package:news/resources/constants.dart';
 import 'package:redux/redux.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:path/path.dart';
 
 import 'add_news_view_model.dart';
 
@@ -53,16 +55,24 @@ class MyAppBar extends StatelessWidget {
   }
 }
 
-// News list
-class AddNewsForm extends StatelessWidget {
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class AddNewsForm extends StatefulWidget {
   final AddNewsViewModel model;
   AddNewsForm(this.model);
+
+  @override
+  _AddNewsFormState createState() => _AddNewsFormState(model);
+}
+
+// News list
+class _AddNewsFormState extends State<AddNewsForm> {
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final AddNewsViewModel model;
+  _AddNewsFormState(this.model);
 
   String _title;
   String _summary;
   String _content;
-
+  var _image;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -83,6 +93,8 @@ class AddNewsForm extends StatelessWidget {
                       validator: (input) {
                         if (input.isEmpty) {
                           return 'Please type a title';
+                        } else {
+                          return '';
                         }
                       },
                       onSaved: (input) => _title = input,
@@ -102,6 +114,8 @@ class AddNewsForm extends StatelessWidget {
                       validator: (input) {
                         if (input.isEmpty) {
                           return 'Please type a summary';
+                        } else {
+                          return '';
                         }
                       },
                       onSaved: (input) => _summary = input,
@@ -135,7 +149,9 @@ class AddNewsForm extends StatelessWidget {
                   ),
                   RaisedButton(
                     onPressed: () async {
-                      var _image = await ImagePicker.pickImage(source: ImageSource.gallery);
+                      _image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+
                     },
                     child: Text('Image'),
                   ),
@@ -148,6 +164,10 @@ class AddNewsForm extends StatelessWidget {
                         null,
                         _content
                       );
+//                      String filName = basename(_image.path);
+//                      StorageReference ref = FirebaseStorage.instance.ref().child(filName);
+//                      StorageUploadTask uploadTask = ref.putFile(_image);
+//                      StorageTaskSnapshot snap =  await  uploadTask.onComplete;
                       model.addNewsToFirebase();
                       Navigator.pop(context);
                     },

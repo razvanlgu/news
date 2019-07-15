@@ -36,11 +36,15 @@ class HomeScreen extends StatelessWidget {
     double _screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       drawer: NewsDrawer(),
       appBar: AppBar(
         title:Text('News'),
         actions: <Widget>[
           IconButton(
+            icon: Icon(Icons.refresh),
+            tooltip: 'Refresh',
+            onPressed: () => homeViewModel.refresh(),
             icon: Icon(Icons.favorite_border),
             tooltip: 'Favorite news',
             onPressed: () => Keys.navKey.currentState.pushNamed(Routes.favs),
@@ -52,12 +56,15 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: Stack(
         children: <Widget>[
           NewsList(_screenHeight, homeViewModel),
-          FilterSortButtons(_screenWidth, _screenHeight),
+          Positioned(
+            bottom: 0.0,
+            left: 0.0,
+            right: 0.0,
+            child: FilterSortButtons(_screenWidth, _screenHeight),
+          ),
         ],
       ),
     );
@@ -170,15 +177,27 @@ class NewsList extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                    onPressed: () => model.toggleNews(item.id),
+                      ),
+                      IconButton(
+                        icon: Icon(NewsIcons.dislike),
+                        onPressed: () => print('DISLIKE!!!'),
+                      ),
+                      Expanded(child: Container(),),
+                      IconButton(
+                        color: Colors.black,
+                        icon: Icon(Icons.favorite_border),
+                        onPressed: () => print('ADD TO FAVORITE!!!'),
+                      ),
+                    ],
                   ),
-                );
+                ),
+              ],
+            ),
+            onPressed: () => model.toggleNews(item.id),
+          ),
+        );
+      }).toList(),
 
-
-        }).toList(),
-      ),
     );
   }
 }
@@ -192,56 +211,73 @@ class FilterSortButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
+    return Container(
+      width: _screenWidth,
+      child: Stack(
+        overflow: Overflow.clip,
+        children: <Widget>[
+          Positioned(
+            right: 0.0,
+            left: _screenWidth / 2,
+            child: Container(
 //          duration: Duration(seconds: 1),
-          width: _screenWidth / 2,
-          height: 50,
-          decoration: BoxDecoration(
-            color: NewsColors.textFillColorFocused,
-            shape: BoxShape.rectangle,
-//            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0)),
-            border: BorderDirectional(top: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0),
-                end: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0)
-            ),
-          ),
-          child: Center(
-            child: Text(
-              'Sort',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.w600,
-                color: NewsColors.textBorderColorFocused,
+              height: 50,
+              decoration: BoxDecoration(
+                color: NewsColors.textFillColorFocused,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0)),
+                boxShadow: [
+                  BoxShadow(
+                    color: NewsColors.textBorderColorFocused,
+                    spreadRadius: 4.0,
+                    blurRadius: 8.0,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  'Filter',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                    color: NewsColors.textBorderColorFocused,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          width: _screenWidth / 2,
-          height: 50,
-          decoration: BoxDecoration(
-            color: NewsColors.textFillColorFocused,
-            shape: BoxShape.rectangle,
-//            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0)),
-            border: BorderDirectional(top: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0),
-                end: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0)
-            ),
-          ),
-          child: Center(
-            child: Text(
-              'Filter',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.w600,
-                color: NewsColors.textBorderColorFocused,
+          Positioned(
+            child: Container(
+//          duration: Duration(seconds: 1),
+              width: _screenWidth / 2,
+              height: 50,
+              decoration: BoxDecoration(
+                color: NewsColors.textFillColorFocused,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.only(topRight: Radius.circular(30.0)),
+                boxShadow: [
+                  BoxShadow(
+                    color: NewsColors.textBorderColorFocused,
+                    spreadRadius: 4.0,
+                    blurRadius: 8.0,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  'Sort',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                    color: NewsColors.textBorderColorFocused,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
+
