@@ -39,6 +39,7 @@ class HomeScreenFavs extends StatelessWidget {
       appBar: AppBar(
         title:Text('News'),
         actions: <Widget>[
+          
           IconButton(
             icon: Icon(Icons.favorite, color: Colors.red,),
             tooltip: 'Favorite news',
