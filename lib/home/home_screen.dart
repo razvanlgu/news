@@ -192,56 +192,72 @@ class FilterSortButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
+    return Container(
+      width: _screenWidth,
+      child: Stack(
+        overflow: Overflow.clip,
+        children: <Widget>[
+          Positioned(
+            right: 0.0,
+            left: _screenWidth / 2,
+            child: Container(
 //          duration: Duration(seconds: 1),
-          width: _screenWidth / 2,
-          height: 50,
-          decoration: BoxDecoration(
-            color: NewsColors.textFillColorFocused,
-            shape: BoxShape.rectangle,
-//            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0)),
-            border: BorderDirectional(top: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0),
-                end: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0)
-            ),
-          ),
-          child: Center(
-            child: Text(
-              'Sort',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.w600,
-                color: NewsColors.textBorderColorFocused,
+              height: 50,
+              decoration: BoxDecoration(
+                color: NewsColors.textFillColorFocused,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0)),
+                boxShadow: [
+                  BoxShadow(
+                    color: NewsColors.textBorderColorFocused,
+                    spreadRadius: 4.0,
+                    blurRadius: 8.0,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  'Filter',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                    color: NewsColors.textBorderColorFocused,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          width: _screenWidth / 2,
-          height: 50,
-          decoration: BoxDecoration(
-            color: NewsColors.textFillColorFocused,
-            shape: BoxShape.rectangle,
-//            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0)),
-            border: BorderDirectional(top: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0),
-                end: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0)
-            ),
-          ),
-          child: Center(
-            child: Text(
-              'Filter',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.w600,
-                color: NewsColors.textBorderColorFocused,
+          Positioned(
+            child: Container(
+//          duration: Duration(seconds: 1),
+              width: _screenWidth / 2,
+              height: 50,
+              decoration: BoxDecoration(
+                color: NewsColors.textFillColorFocused,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.only(topRight: Radius.circular(30.0)),
+                boxShadow: [
+                  BoxShadow(
+                    color: NewsColors.textBorderColorFocused,
+                    spreadRadius: 4.0,
+                    blurRadius: 8.0,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  'Sort',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                    color: NewsColors.textBorderColorFocused,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
