@@ -10,9 +10,8 @@ import 'package:news/ui/news_drawer.dart';
 import 'package:redux/redux.dart';
 
 import 'home_actions.dart';
-import 'home_screen_favs.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreenFavs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,18 +35,14 @@ class HomeScreen extends StatelessWidget {
     double _screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
       drawer: NewsDrawer(),
       appBar: AppBar(
         title:Text('News'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.refresh),
-            tooltip: 'Refresh',
-            onPressed: () => homeViewModel.refresh(),
-            icon: Icon(Icons.favorite_border),
+            icon: Icon(Icons.favorite, color: Colors.red,),
             tooltip: 'Favorite news',
-            onPressed: () => Keys.navKey.currentState.pushNamed(Routes.favs),
+            onPressed: () => Keys.navKey.currentState.pushNamed(Routes.home),
           ),
           IconButton(
             icon: Icon(Icons.add_circle),
@@ -56,15 +51,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Stack(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           NewsList(_screenHeight, homeViewModel),
-          Positioned(
-            bottom: 0.0,
-            left: 0.0,
-            right: 0.0,
-            child: FilterSortButtons(_screenWidth, _screenHeight),
-          ),
+          FilterSortButtons(_screenWidth, _screenHeight),
         ],
       ),
     );
@@ -84,6 +76,7 @@ class NewsList extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         children: model.news
             .map((NewsItem item) {
+              if (item.isFav == true) {
                 return Container(
                   margin: EdgeInsetsDirectional.only(top: 15.0),
                   child: RaisedButton(
@@ -177,27 +170,17 @@ class NewsList extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
-                      IconButton(
-                        icon: Icon(NewsIcons.dislike),
-                        onPressed: () => print('DISLIKE!!!'),
-                      ),
-                      Expanded(child: Container(),),
-                      IconButton(
-                        color: Colors.black,
-                        icon: Icon(Icons.favorite_border),
-                        onPressed: () => print('ADD TO FAVORITE!!!'),
-                      ),
-                    ],
+                      ],
+                    ),
+                    onPressed: () => model.toggleNews(item.id),
                   ),
-                ),
-              ],
-            ),
-            onPressed: () => model.toggleNews(item.id),
-          ),
-        );
-      }).toList(),
+                );
+              } else {
+                return Container();
+              }
 
+        }).toList(),
+      ),
     );
   }
 }
@@ -211,73 +194,56 @@ class FilterSortButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: _screenWidth,
-      child: Stack(
-        overflow: Overflow.clip,
-        children: <Widget>[
-          Positioned(
-            right: 0.0,
-            left: _screenWidth / 2,
-            child: Container(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Container(
 //          duration: Duration(seconds: 1),
-              height: 50,
-              decoration: BoxDecoration(
-                color: NewsColors.textFillColorFocused,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0)),
-                boxShadow: [
-                  BoxShadow(
-                    color: NewsColors.textBorderColorFocused,
-                    spreadRadius: 4.0,
-                    blurRadius: 8.0,
-                  ),
-                ],
-              ),
-              child: Center(
-                child: Text(
-                  'Filter',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                    color: NewsColors.textBorderColorFocused,
-                  ),
-                ),
+          width: _screenWidth / 2,
+          height: 50,
+          decoration: BoxDecoration(
+            color: NewsColors.textFillColorFocused,
+            shape: BoxShape.rectangle,
+//            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0)),
+            border: BorderDirectional(top: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0),
+                end: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0)
+            ),
+          ),
+          child: Center(
+            child: Text(
+              'Sort',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w600,
+                color: NewsColors.textBorderColorFocused,
               ),
             ),
           ),
-          Positioned(
-            child: Container(
-//          duration: Duration(seconds: 1),
-              width: _screenWidth / 2,
-              height: 50,
-              decoration: BoxDecoration(
-                color: NewsColors.textFillColorFocused,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.only(topRight: Radius.circular(30.0)),
-                boxShadow: [
-                  BoxShadow(
-                    color: NewsColors.textBorderColorFocused,
-                    spreadRadius: 4.0,
-                    blurRadius: 8.0,
-                  ),
-                ],
-              ),
-              child: Center(
-                child: Text(
-                  'Sort',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                    color: NewsColors.textBorderColorFocused,
-                  ),
-                ),
+        ),
+        Container(
+          width: _screenWidth / 2,
+          height: 50,
+          decoration: BoxDecoration(
+            color: NewsColors.textFillColorFocused,
+            shape: BoxShape.rectangle,
+//            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0)),
+            border: BorderDirectional(top: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0),
+                end: BorderSide(color: NewsColors.textBorderColorFocused, width: 3.0)
+            ),
+          ),
+          child: Center(
+            child: Text(
+              'Filter',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w600,
+                color: NewsColors.textBorderColorFocused,
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
-

@@ -29,7 +29,7 @@ void _registerFirebaseUserAction(Store<AppState> store, RegisterFirebaseUserActi
       password: store.state.authState.password
   );
 
-    Firestore.instance.collection('users').document(user.uid).setData({ 'email': '${ store.state.authState.email}' });
+    Firestore.instance.collection('users').document(user.uid).setData({ 'email': '${ store.state.authState.email}' ,'favs':{} , 'likes':{} });
     next(action);
 }
 

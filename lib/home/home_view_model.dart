@@ -12,6 +12,9 @@ class HomeViewModel {
   final Function(String id) toggleNews;
   final Function(String id) openNews;
   final Function() refresh;
+  final Function(String id) makeFav;
+  final Function(String id, bool isLike) like;
+
   // Constructor
   HomeViewModel({
     @required this.news,
@@ -19,6 +22,8 @@ class HomeViewModel {
     @required this.toggleNews,
     @required this.openNews,
     @required this.refresh,
+    this.makeFav,
+    this.like,
   });
 
   factory HomeViewModel.fromStore(Store<AppState> store) {
@@ -28,6 +33,8 @@ class HomeViewModel {
       toggleNews: (String id) => store.dispatch(ToggleNewsAction(id)),
       openNews: (String id) => store.dispatch(GetNewsPageAction(id)),
       refresh: () => store.dispatch(GetNewsAction()),
+      makeFav: (String id) => store.dispatch(MakeFav(id)),
+      like: (String id, bool isLike) => store.dispatch(Like(id, isLike)),
     );
   }
 }

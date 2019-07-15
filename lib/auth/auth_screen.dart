@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                       await authViewModel.getFirebaseUser();
 
                    if(authViewModel.firebaseUser == null){
-                        _showAlertDraw(context);
+                        await _showAlertDraw(context);
                    }
 
                     },

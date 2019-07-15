@@ -12,11 +12,12 @@ import 'package:news/redux/appstate.dart';
 import 'package:news/redux/store.dart';
 import 'package:news/resources/keys.dart';
 import 'package:news/resources/constants.dart';
-import 'package:news/home/home_screen.dart';
+import 'package:news/home/home_screen_favs.dart';
 
 import 'add_news/add_news_screen.dart';
 import 'auth/auth_screen.dart';
 import 'auth/register_screen.dart';
+import 'home/home_screen.dart';
 import 'map/map_screen.dart';
 
 void main() async {
@@ -104,6 +105,7 @@ class MyApp extends StatelessWidget {
         Routes.editProfile:(context) => EditUserProfileScreen(),
         Routes.map:(context) => MapScreen(),
         Routes.newsPage:(context) => PageScreen(),
+        Routes.favs:(context) => HomeScreenFavs(),
       },
 
       home: _handleCurrentScreen(),
