@@ -41,6 +41,11 @@ class HomeScreen extends StatelessWidget {
         title:Text('News'),
         actions: <Widget>[
           IconButton(
+            icon: Icon(Icons.refresh),
+            tooltip: 'Refresh',
+            onPressed: () => homeViewModel.refresh(),
+          ),
+          IconButton(
             icon: Icon(Icons.favorite_border),
             tooltip: 'Favorite news',
             onPressed: () => Keys.navKey.currentState.pushNamed(Routes.favs),
