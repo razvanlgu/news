@@ -161,4 +161,5 @@ class AddNewsForm extends StatelessWidget {
       ),
     );
   }
+
 }

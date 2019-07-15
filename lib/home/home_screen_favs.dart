@@ -10,9 +10,8 @@ import 'package:news/ui/news_drawer.dart';
 import 'package:redux/redux.dart';
 
 import 'home_actions.dart';
-import 'home_screen_favs.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreenFavs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +40,9 @@ class HomeScreen extends StatelessWidget {
         title:Text('News'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.favorite_border),
+            icon: Icon(Icons.favorite, color: Colors.red,),
             tooltip: 'Favorite news',
-            onPressed: () => Keys.navKey.currentState.pushNamed(Routes.favs),
+            onPressed: () => Keys.navKey.currentState.pushNamed(Routes.home),
           ),
           IconButton(
             icon: Icon(Icons.add_circle),
@@ -77,6 +76,7 @@ class NewsList extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         children: model.news
             .map((NewsItem item) {
+              if (item.isFav == true) {
                 return Container(
                   margin: EdgeInsetsDirectional.only(top: 15.0),
                   child: RaisedButton(
@@ -175,7 +175,9 @@ class NewsList extends StatelessWidget {
                     onPressed: () => model.toggleNews(item.id),
                   ),
                 );
-
+              } else {
+                return Container();
+              }
 
         }).toList(),
       ),
