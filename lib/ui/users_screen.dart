@@ -18,6 +18,16 @@ class UsersPageScreen extends StatelessWidget {
         .size
         .height;
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Users',
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed:() => Navigator.pop(context),
+        ),
+      ),
       body: StoreConnector<AppState, UsersPageViewModel>(
         converter: (store) => UsersPageViewModel.fromStore(store),
         builder: (context, userPageViewModel) =>
@@ -66,7 +76,8 @@ class UsersList extends StatelessWidget {
         children: <Widget>[
           Text('Name: ' + '${user.name}'),
           Text('Email: ' + '${user.email}'),
-          Text('Phone Number: ' + '${user.name}'),
+          Text('Phone Number: ' + '${user.phoneNumber}'),
+          Divider(color: Colors.blueGrey,  ),
         ]
       ),
     );
