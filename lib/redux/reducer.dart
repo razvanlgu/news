@@ -3,6 +3,7 @@ import 'package:news/auth/auth_reducer.dart';
 import 'package:news/home/home_reducer.dart';
 import 'package:news/page/page_reducer.dart';
 import 'package:news/redux/appstate.dart';
+import 'package:news/ui/users_reducer.dart';
 import 'package:news/user_profile/user_profile_reducer.dart';
 
 
@@ -14,4 +15,5 @@ AppState appReducer(AppState state, dynamic action) =>
       addNewsState: addNewsReducer(state.addNewsState, action),
       userProfileState: userProfileReducer(state.userProfileState, action),
       pageState: pageReducer(state.pageState, action),
+          usersPageState: usersReducer(state.usersPageState, action),
     );

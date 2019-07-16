@@ -117,7 +117,7 @@ double _height = MediaQuery.of(context).size.height - MediaQuery.of(context).pad
             decoration: BoxDecoration(
             ),
             child:Column(
-                children: <Widget>[
+                children:  <Widget>[
                   _drawerTile(
                       route:Routes.home,
                       name:'News',
@@ -129,6 +129,15 @@ double _height = MediaQuery.of(context).size.height - MediaQuery.of(context).pad
                      name:'News Map',
                      icon:Icons.map
                    ) ,
+
+//                  ConditionalBuilder (
+//                    condition: isAdmin,
+//                    builder: (context) =>
+                  _drawerTile(
+                      route: Routes.users,
+                      name: 'Users',
+                      icon: Icons.supervised_user_circle,
+                  ),
                   Expanded(
                     child: Container(),
                   ),
