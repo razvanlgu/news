@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:news/entities/news_item.dart';
 import 'package:news/home/home_view_model.dart';
 import 'package:news/redux/appstate.dart';
@@ -7,6 +9,7 @@ import 'package:news/resources/constants.dart';
 import 'package:news/resources/keys.dart';
 import 'package:news/resources/news_icons_icons.dart';
 import 'package:news/ui/news_drawer.dart';
+import 'package:news/user_profile/user_details.dart';
 import 'package:redux/redux.dart';
 
 import 'home_actions.dart';
@@ -27,8 +30,11 @@ class HomeScreen extends StatelessWidget {
   /**
    * Get all the news
    */
-  _onInit(Store<AppState> store) {
+  bool check;
+  _onInit(Store<AppState> store) async {
     store.dispatch(GetNewsAction());
+    check = await checkIfAdmin();
+
   }
 
   Widget _content(BuildContext context, HomeViewModel homeViewModel) {
@@ -265,4 +271,11 @@ class FilterSortButtons extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<bool> checkIfAdmin() async {
+  FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  DocumentSnapshot snapshot= await Firestore.instance.collection('users').document(user.uid).get();
+  UserDetails userDetails = UserDetails.fromFirebase(snapshot);
+  return userDetails.isAdmin;
 }

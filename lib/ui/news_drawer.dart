@@ -1,26 +1,43 @@
 
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/auth/auth_view_model.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
+import 'package:news/user_profile/user_details.dart';
 import 'package:news/user_profile/user_profile_actions.dart';
+import 'package:redux/redux.dart';
 
 
-class NewsDrawer extends StatelessWidget {
+class NewsDrawer extends StatefulWidget {
+  @override
+  _NewsDrawerState createState() => _NewsDrawerState();
+}
+
+class _NewsDrawerState extends State<NewsDrawer> {
+  bool check = false;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: StoreConnector<AppState, AuthViewModel>(
         converter: (store) => AuthViewModel.fromStore(store),
-        onInit: (store) => store.dispatch(GetProfileAction()),
+        onInit: _onInit,
         builder: (context, authViewModel) => _content(context, authViewModel),
       ),
       );
 
   }
+
+  _onInit(Store<AppState> store) async {
+    store.dispatch(GetProfileAction());
+    check = await checkIfAdmin();
+  }
+
   Widget _content(BuildContext context, AuthViewModel authViewModel) {
 double _height = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).viewInsets.top;
     Widget _drawerTile(
@@ -129,15 +146,11 @@ double _height = MediaQuery.of(context).size.height - MediaQuery.of(context).pad
                      name:'News Map',
                      icon:Icons.map
                    ) ,
-
-//                  ConditionalBuilder (
-//                    condition: isAdmin,
-//                    builder: (context) =>
-                  _drawerTile(
-                      route: Routes.users,
-                      name: 'Users',
-                      icon: Icons.supervised_user_circle,
-                  ),
+                  check ? _drawerTile(
+                  route: Routes.users,
+                  name: 'Users',
+                  icon: Icons.supervised_user_circle,
+                  ) : Container(),
                   Expanded(
                     child: Container(),
                   ),
@@ -161,3 +174,9 @@ double _height = MediaQuery.of(context).size.height - MediaQuery.of(context).pad
   }
 }
 
+Future<bool> checkIfAdmin() async {
+  FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  DocumentSnapshot snapshot= await Firestore.instance.collection('users').document(user.uid).get();
+  UserDetails userDetails = UserDetails.fromFirebase(snapshot);
+  return userDetails.isAdmin;
+}
