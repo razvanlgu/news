@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news/redux/appstate.dart';
@@ -59,11 +61,14 @@ class UsersPageScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   UsersList(_screenHeight, usersPageViewModel),
+                 // DeleteButton(_screenHeight, _screenHeight, usersPageViewModel),
                 ],
               ),
 
       );
 }
+
+
 
 class UsersList extends StatelessWidget {
   final double _screenHeight;
@@ -71,6 +76,7 @@ class UsersList extends StatelessWidget {
   UsersList(this._screenHeight, this.model);
 
   Widget tile(UserDetails user) {
+
     return Container(
       child: Column(
         children: <Widget>[
