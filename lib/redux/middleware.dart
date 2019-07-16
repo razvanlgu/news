@@ -7,6 +7,7 @@ import 'package:news/page/page_middleware.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
 import 'package:news/resources/keys.dart';
+import 'package:news/ui/users_middleware.dart';
 import 'package:news/user_profile/user_profile_actions.dart';
 import 'package:news/user_profile/user_profile_middleware.dart';
 import 'package:redux/redux.dart';
@@ -20,7 +21,9 @@ List<Middleware<AppState>> middlewares() => [
   ..addAll(homeMiddleware())
   ..addAll(profileMiddleware())
   ..addAll(addNewsMiddleware())
+  ..addAll(usersMiddleware())
   ..addAll(pageMiddleware());
+
 
 class NavigationMiddleware extends MiddlewareClass<AppState>{
   @override
@@ -36,6 +39,7 @@ class NavigationMiddleware extends MiddlewareClass<AppState>{
     if (action is NavigateToAddNewsPage) {
       Keys.navKey.currentState.pushNamed(Routes.addNews);
     }
+
     if(action is NavigateToHomePage){
       Keys.navKey.currentState.pop();
       Keys.navKey.currentState.pushReplacementNamed(Routes.home);
@@ -45,6 +49,9 @@ class NavigationMiddleware extends MiddlewareClass<AppState>{
     }
     if (action is NavigateToNewsPage) {
       Keys.navKey.currentState.pushNamed(Routes.newsPage);
+    }
+    if (action is NavigateToUsersPage) {
+      Keys.navKey.currentState.pushNamed(Routes.users);
     }
     next(action);
   }
