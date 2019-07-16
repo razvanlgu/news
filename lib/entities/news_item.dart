@@ -8,6 +8,8 @@ class NewsItem {
   final int likes;
   final int dislikes;
   final double expandHeight;
+  final bool isFav;
+  final bool isLiked;
 
   NewsItem({
     @required this.id,
@@ -17,6 +19,8 @@ class NewsItem {
     @required this.likes,
     @required this.dislikes,
     @required this.expandHeight,
+    this.isFav,
+    this.isLiked,
   });
 
   NewsItem copyWith({
@@ -26,7 +30,9 @@ class NewsItem {
     String imageUrl,
     int likes,
     int dislikes,
-    double expandHeight
+    double expandHeight,
+    bool isFav,
+    bool isLiked,
     }) {
     return NewsItem(
         id: id ?? this.id,
@@ -36,6 +42,8 @@ class NewsItem {
         likes: likes ?? this.likes,
         dislikes: dislikes ?? this.dislikes,
         expandHeight: expandHeight ?? this.expandHeight,
+        isFav: isFav ?? this.isFav,
+        isLiked: isLiked ?? this.isLiked,
     );
   }
 

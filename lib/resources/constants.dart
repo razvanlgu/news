@@ -10,7 +10,8 @@ class Routes {
   static final map = '/map';
   static final newsPage = '/page';
   static final users = '/users';
-  }
+  static final favs = '/favs';
+}
 
 class Collections {
   /**
