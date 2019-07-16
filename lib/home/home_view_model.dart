@@ -6,7 +6,7 @@ import 'package:redux/redux.dart';
 import 'home_actions.dart';
 
 class HomeViewModel {
-  final List<NewsItem> news;
+  final List<String> idNews;
 
   final Function() addNews;
   final Function(String id) toggleNews;
@@ -17,18 +17,18 @@ class HomeViewModel {
 
   // Constructor
   HomeViewModel({
-    @required this.news,
+    @required this.idNews,
     @required this.addNews,
     @required this.toggleNews,
     @required this.openNews,
     @required this.refresh,
-    this.makeFav,
-    this.like,
+    @required this.makeFav,
+    @required this.like,
   });
 
   factory HomeViewModel.fromStore(Store<AppState> store) {
     return HomeViewModel(
-      news: store.state.homeState.news,
+      idNews: store.state.homeState.idNews,
       addNews: () => store.dispatch(NavigateToAddNewsPage()),
       toggleNews: (String id) => store.dispatch(ToggleNewsAction(id)),
       openNews: (String id) => store.dispatch(GetNewsPageAction(id)),

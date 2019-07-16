@@ -3,6 +3,7 @@ import 'package:news/auth/auth_state.dart';
 import 'package:news/auth/user_state.dart';
 import 'package:news/home/home_state.dart';
 import 'package:meta/meta.dart';
+import 'package:news/news_card/news_card_state.dart';
 import 'package:news/page/page_state.dart';
 import 'package:news/user_profile/user_profile_state.dart';
 
@@ -14,6 +15,7 @@ class AppState {
   final AddNewsState addNewsState;
   final UserProfileState userProfileState;
   final PageState pageState;
+  final NewsCardState newsCardState;
 
   AppState({
     this.homeState,
@@ -22,6 +24,7 @@ class AppState {
     this.addNewsState,
     this.userProfileState,
     this.pageState,
+    this.newsCardState,
   });
 
   factory AppState.initial() {
@@ -32,6 +35,7 @@ class AppState {
       addNewsState: AddNewsState.initial(),
       userProfileState: UserProfileState.initial(),
       pageState: PageState.initial(),
+      newsCardState: NewsCardState.initial(),
     );
   }
 }

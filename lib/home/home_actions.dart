@@ -4,9 +4,9 @@ import 'package:news/entities/news_item.dart';
 class GetNewsAction{}
 
 class UpdateNewsAction{
-  final List<NewsItem> news;
+  final List<String> idNews;
 
-  UpdateNewsAction({this.news});
+  UpdateNewsAction({this.idNews});
 }
 
 class ToggleNewsAction{

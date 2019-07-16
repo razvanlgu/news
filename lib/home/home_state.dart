@@ -1,27 +1,25 @@
 import 'package:meta/meta.dart';
-import 'package:news/entities/news_item.dart';
 
 @immutable
 class HomeState {
 
-  final List<NewsItem> news;
+  final List<String> idNews;
 
   // Constrctor
   HomeState({
-    this.news,
+    this.idNews,
   });
 
   factory HomeState.initial() =>
       HomeState(
-        news: List.unmodifiable(<NewsItem>[]),
+        idNews: List.unmodifiable(<String>[]),
       );
 
-
   HomeState copyWith({
-    List<NewsItem> news,
+    List<String> idNews,
   }) =>
     HomeState(
-      news: news ?? this.news,
+      idNews: idNews ?? this.idNews,
     );
 
 }

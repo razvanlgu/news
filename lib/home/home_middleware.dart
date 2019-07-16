@@ -15,27 +15,12 @@ List<Middleware<AppState>> homeMiddleware() => [
 
 // Get all the news from database and put them in a List
 void _getNewsAction(Store<AppState> store, GetNewsAction action, NextDispatcher next) async {
-  FirebaseUser user = await FirebaseAuth.instance.currentUser();
-  DocumentSnapshot snapshot = await Firestore.instance.collection('users').document(user.uid).get();
-
-
   QuerySnapshot snapshots = await Firestore.instance.collection('news').getDocuments();
-  List<NewsItem> news = snapshots.documents
-      .map((DocumentSnapshot document) => NewsItem(
-        id: document.documentID,
-        title: document.data['title'],
-        summary: document.data['summary'],
-        imageUrl: document.data['imageUrl'],
-        likes: document.data['likes'],
-        dislikes: document.data['dislikes'],
-        expandHeight: 0.0,
-        isFav: snapshot.data['favs']['${document.documentID}'] ?? false,
-        isLiked: snapshot.data['likes']['${document.documentID}'] ,
+  List<String> idNews = snapshots.documents
+      .map((DocumentSnapshot document) => document.documentID).toList();
 
-  )).toList();
-
-  if (news != null) {
-    store.dispatch(UpdateNewsAction(news: news));
+  if (idNews != null) {
+    store.dispatch(UpdateNewsAction(idNews: idNews));
   }
   next(action);
 }

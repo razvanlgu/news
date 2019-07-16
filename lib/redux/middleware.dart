@@ -3,6 +3,7 @@ import 'package:news/auth/auth_actions.dart';
 import 'package:news/auth/auth_middleware.dart';
 import 'package:news/home/home_actions.dart';
 import 'package:news/home/home_middleware.dart';
+import 'package:news/news_card/news_card_middleware.dart';
 import 'package:news/page/page_middleware.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:news/resources/constants.dart';
@@ -20,7 +21,8 @@ List<Middleware<AppState>> middlewares() => [
   ..addAll(homeMiddleware())
   ..addAll(profileMiddleware())
   ..addAll(addNewsMiddleware())
-  ..addAll(pageMiddleware());
+  ..addAll(pageMiddleware())
+  ..addAll(newsCardMiddleware());
 
 class NavigationMiddleware extends MiddlewareClass<AppState>{
   @override

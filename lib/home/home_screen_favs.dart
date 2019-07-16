@@ -15,13 +15,17 @@ class HomeScreenFavs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StoreConnector<AppState, HomeViewModel>(
-        converter: (store) => HomeViewModel.fromStore(store),
-        builder: (context, homeViewModel) => _content(context, homeViewModel),
-        onInit: _onInit,
-      ),
+//      body: StoreConnector<AppState, HomeViewModel>(
+//        converter: (store) => HomeViewModel.fromStore(store),
+//        builder: (context, homeViewModel) => _content(context, homeViewModel),
+//        onInit: _onInit,
+//      ),
     );
   }
+}
+
+  /*
+
 
 /**
  * Get all the news
@@ -247,3 +251,4 @@ class FilterSortButtons extends StatelessWidget {
     );
   }
 }
+*/
