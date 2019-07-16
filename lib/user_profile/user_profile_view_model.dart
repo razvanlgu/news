@@ -12,6 +12,7 @@ class UserProfileViewModel{
   final VoidCallback updateProfile;
   final VoidCallback goEditProfile;
 
+
   final Function(UserDetails) saveProfile;
 
   UserProfileViewModel( {this.userDetails, this.updateProfile, this.goEditProfile, this.saveProfile});
