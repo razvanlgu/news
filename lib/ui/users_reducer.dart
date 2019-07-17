@@ -9,4 +9,6 @@ final usersReducer = combineReducers<UsersPageState>([
 ]);
 
 UsersPageState _updateUsersAction(UsersPageState state, UpdateUsersAction action) =>
-    state.copyWith(listUserDetails: action.listUserDetails);
+    state.copyWith(
+        listUserDetails: action.listUserDetails
+    );

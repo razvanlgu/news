@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class UpdateAddedNewsAction{
   final String id;
   final String title;
@@ -15,4 +17,13 @@ class UpdateAddedNewsAction{
 }
 
 class AddNewsToFirebaseAction{
+  final String imageUrl;
+
+  AddNewsToFirebaseAction({this.imageUrl});
+}
+
+class UploadPhoto{
+  final File img;
+
+  UploadPhoto({this.img});
 }

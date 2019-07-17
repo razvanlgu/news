@@ -18,7 +18,6 @@ void _getNewsAction(Store<AppState> store, GetNewsAction action, NextDispatcher 
   FirebaseUser user = await FirebaseAuth.instance.currentUser();
   DocumentSnapshot snapshot = await Firestore.instance.collection('users').document(user.uid).get();
 
-
   QuerySnapshot snapshots = await Firestore.instance.collection('news').getDocuments();
   List<NewsItem> news = snapshots.documents
       .map((DocumentSnapshot document) => NewsItem(

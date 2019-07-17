@@ -20,7 +20,7 @@ class AddNewsState {
       id: '',
       title: '',
       summary: '',
-      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/news-868b9.appspot.com/o/News%2Fboxer.jpg?alt=media&token=56632a12-a7a2-4c2b-ae47-e8aa4b8fd89f',
+      imageUrl: '',
       content: ''
     );
 

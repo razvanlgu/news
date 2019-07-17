@@ -51,14 +51,6 @@ class UserDetails {
       isAdmin: false,
     );
   }
-    @override
-    String toString() {
-      return '''
-      name : $name
-      email : $email
-      phoneNumber : $phoneNumber
-      noNewsAdded: $noNewsAdded
-      isAdmin : $isAdmin
-    ''';
-    }
+
+
 }

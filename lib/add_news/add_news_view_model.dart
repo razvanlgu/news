@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:meta/meta.dart';
 import 'package:news/redux/appstate.dart';
 import 'package:redux/redux.dart';
@@ -10,9 +12,10 @@ class AddNewsViewModel {
   final String imageUrl;
   final String content;
 
-  final Function(String title, String summary,
-      String imageUrl, String content) updateAddedNews;
+  final Function({String title, String summary,
+      String imageUrl, String content}) updateAddedNews;
   final Function() addNewsToFirebase;
+  final Function(File image) uploadPhoto;
 
   // Constructor
   AddNewsViewModel({
@@ -22,6 +25,7 @@ class AddNewsViewModel {
     @required this.content,
     @required this.updateAddedNews,
     @required this.addNewsToFirebase,
+    this.uploadPhoto,
   });
 
   factory AddNewsViewModel.fromStore(Store<AppState> store) {
@@ -30,14 +34,15 @@ class AddNewsViewModel {
       summary: store.state.addNewsState.summary,
       imageUrl: store.state.addNewsState.imageUrl,
       content: store.state.addNewsState.content,
-      updateAddedNews: (String title, String summary,
-          String imageUrl, String content) =>
+      updateAddedNews: ({String title, String summary,
+          String imageUrl, String content}) =>
         store.dispatch(UpdateAddedNewsAction(
+            imageUrl: imageUrl,
             title: title,
             summary: summary,
-            imageUrl: imageUrl,
             content: content)),
       addNewsToFirebase: () => store.dispatch(AddNewsToFirebaseAction()),
+      uploadPhoto: (File image) => store.dispatch(UploadPhoto(img: image)),
     );
   }
 }

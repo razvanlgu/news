@@ -8,7 +8,7 @@ import 'package:redux/redux.dart';
 List<Middleware<AppState>> profileMiddleware () =>[
   TypedMiddleware<AppState, GetProfileAction>(_getProfile),
   TypedMiddleware<AppState, SaveProfileAction>(_saveProfile),
-  
+
 ];
 void _getProfile(Store<AppState> store, GetProfileAction action, NextDispatcher next) async {
   FirebaseUser auth = await FirebaseAuth.instance.currentUser();

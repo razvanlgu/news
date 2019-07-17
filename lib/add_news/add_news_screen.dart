@@ -19,16 +19,10 @@ class AddNewsScreen extends StatelessWidget {
       body: StoreConnector<AppState, AddNewsViewModel>(
         converter: (store) => AddNewsViewModel.fromStore(store),
         builder: (context, addNewsViewModel) => _content(context, addNewsViewModel),
-//        onInit: _onInit,
       ),
     );
   }
 
-  /**
-   * Get all the news
-   */
-  _onInit(Store<AppState> store) {
-  }
 
   Widget _content(BuildContext context, AddNewsViewModel addNewsViewModel) {
     return Column(
@@ -159,16 +153,14 @@ class _AddNewsFormState extends State<AddNewsForm> {
                     onPressed: () async {
                       _formKey.currentState.save();
                       model.updateAddedNews(
-                        _title,
-                        _summary,
-                        null,
-                        _content
+                       title: _title,
+                          summary:_summary,
+                      content:  _content,
                       );
-//                      String filName = basename(_image.path);
-//                      StorageReference ref = FirebaseStorage.instance.ref().child(filName);
-//                      StorageUploadTask uploadTask = ref.putFile(_image);
-//                      StorageTaskSnapshot snap =  await  uploadTask.onComplete;
-                      model.addNewsToFirebase();
+                       model.uploadPhoto(_image);
+
+                      //model.addNewsToFirebase();
+
                       Navigator.pop(context);
                     },
                     child: Text('Submit'),
